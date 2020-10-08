@@ -4,8 +4,10 @@ import resource
 def stress():
     """Generates random bytes with the multiple of 1024 (~1GB)"""
     import numpy
-    result = [numpy.random.bytes(1024 * 1024) for _ in range(1024)]
-    return f'Injected stress in bytes: {len(result)}'
+    from tqdm import tqdm
+    result = [numpy.random.bytes(1024 * 1024) for _ in tqdm(range(1024), desc='Generating random bytes', unit=' bytes',
+                                                            leave=False)]
+    return f'Injected stress in bytes: {(len(result)* 1024 * 1024)}'
 
 
 def size_converter(byte_size):
