@@ -1,4 +1,4 @@
-import resource
+import platform
 
 
 def stress():
@@ -23,5 +23,17 @@ def size_converter(byte_size):
 
 if __name__ == '__main__':
     print(stress())
-    memory_utilized = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+
+    operating_system = platform.system()
+
+    if operating_system == 'Darwin':
+        import resource
+        memory_utilized = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    elif operating_system == 'Windows':
+        import psutil
+        import os
+        process = psutil.Process(os.getpid())
+        memory_utilized = process.memory_info().peak_wset
+    else:
+        memory_utilized = None
     print(f'Actual memory consumed: {size_converter(memory_utilized)}')
