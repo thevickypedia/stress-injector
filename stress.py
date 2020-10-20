@@ -1,13 +1,14 @@
 import platform
 
 
-def stress():
+def stress(gb):
     """Generates random bytes with the multiple of 1024 (~1GB)"""
     import numpy
     from tqdm import tqdm
-    result = [numpy.random.bytes(1024 * 1024) for _ in tqdm(range(1024), desc='Generating random bytes', unit=' bytes',
+    mb2bytes = 1024 * 1024  # megabytes to bytes
+    result = [numpy.random.bytes(mb2bytes) for _ in tqdm(range(gb), desc='Generating random bytes', unit=' bytes',
                                                             leave=False)]
-    return f'Injected stress in bytes: {(len(result)* 1024 * 1024)}'
+    return f'Injected stress in bytes: {(len(result) * mb2bytes)}'
 
 
 def size_converter(byte_size):
@@ -22,7 +23,13 @@ def size_converter(byte_size):
 
 
 if __name__ == '__main__':
-    print(stress())
+    desired_bytes = input('Enter the number of Gigabytes you would like to inject as stress:\n')
+    gigabytes = int(desired_bytes) * 1024  # gigabytes to megabytes
+
+    try:
+        print(stress(gigabytes))
+    except KeyboardInterrupt:
+        pass
 
     operating_system = platform.system()
 
