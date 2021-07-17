@@ -14,3 +14,9 @@ Python script, to inject memory and CPU stress
 * The infinite loop will run for a given # of seconds provided by user.
 * Mean-while the `cpu_percent` from `psutil` runs (dedicated thread) in an infinite loop with kill signal set to `False` calculating the current CPU utilization on each CPU core.
 * Once the given # of seconds have passed, the `kill_signal` is set to `True` and some painful steps to _gracefully_ stop the `multiprocess` and multi-thread.
+
+## License & copyright
+
+&copy; Vignesh Sivanandha Rao
+
+Licensed under the [MIT License](LICENSE)
