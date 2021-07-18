@@ -1,5 +1,5 @@
 import sys
-from multiprocessing import Process as Multiprocess
+from multiprocessing import Process
 from os import cpu_count
 from threading import Thread
 from time import sleep
@@ -32,7 +32,7 @@ def measure_cpu() -> None:
         - The `stdout` is set to write and flush as the % value changes.
         - This is done using the `sys.stdout.write` module which is set to work as expected only in an IDE.
         - Sorry Terminal fans, but on the bright side,
-            - The `\\r` in `sys.stdout.write` can be gracefully replaced by a `os.system('clear')` instead.
+          `os.system('clear')` can be added right after `sys.stdout.write(f'\\r{output.strip()}')`
     """
     processors = []
     while True:
@@ -68,9 +68,10 @@ def format_number(n) -> int:
 
 
 def cpu_stress() -> None:
-    """Controller for CPU stress using multiprocessing for the number of cores after getting the duration as user input.
+    """`Controller <https://git.io/JW70u>`__ for CPU stress using multiprocessing. Gets duration as user input.
 
-    CPU monitor using multiprocessing to notify CPU performance under stress.
+    CPU is stressed using `multiprocessing.Process <https://docs.python.org/3/library/multiprocessing.html#
+    the-process-class>`__ to run the infinite loop on each process.
 
     See Also:
         Suggests a duration (in seconds) that is 5 times the # of logical cores present.
@@ -93,7 +94,7 @@ def cpu_stress() -> None:
         print(f'Stressing CPU cores for {waiter} seconds')
         processes = []
         for n in range(cpu_count()):
-            processes.append(Multiprocess(target=infinite))
+            processes.append(Process(target=infinite))
         measure = Thread(target=measure_cpu)
         [each_core.start() for each_core in processes]
         measure.start()

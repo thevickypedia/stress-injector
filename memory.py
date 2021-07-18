@@ -9,7 +9,9 @@ from tqdm import tqdm
 
 
 def stress(gb) -> str:
-    """Generates random bytes with the multiple of 1024 ~ 1GB. Uses tqdm module to show a progress bar.
+    """Generates `random bytes <https://numpy.org/doc/stable/reference/random/generated/numpy.random.bytes.html>`__.
+
+    Bytes are generated with the multiple of 1024 ~ 1GB. Uses tqdm module to show a progress bar.
 
     Args:
         gb: The number of `GigaBytes` of stress has be induced A.k.a random bytes have to be generated.
@@ -34,6 +36,7 @@ def memory_util_check() -> int:
     References:
         MacOS:
             >>> getrusage(RUSAGE_SELF).ru_maxrss
+                `getrusage <https://docs.python.org/3/library/resource.html#resource.getrusage>`__
         Windows:
             >>> process.memory_info().peak_wset
     """
@@ -64,7 +67,7 @@ def size_converter(byte_size) -> str:
 
 
 def memory_stress():
-    """Controller to trigger the memory stress. Gets user input for the number of GBs stress has to be induced.
+    """`Controller <https://git.io/JW70h>`__ to trigger the memory stress. Gets number of GBs as user input.
 
     See Also:
         Suggests twice the amount of physical memory.
