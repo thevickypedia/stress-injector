@@ -20,16 +20,16 @@ def read(name):
 
 
 setup(
-    name='gmail-connector',
+    name='stress-injector',
     version='.'.join(str(c) for c in version_info),
-    description='Python module to, send SMS, emails and read unread emails.',
+    description='Python module, to inject memory and CPU stress.',
     long_description=read('README.md') + '\n\n' + read('CHANGELOG'),
-    url='https://github.com/thevickypedia/gmail-connector',
+    url='https://github.com/thevickypedia/stress_injector',
     author='Vignesh Sivanandha Rao',
     author_email='svignesh1793@gmail.com',
     License='MIT',
     classifiers=classifiers,
-    keywords='gmail, smtp, imap, tls',
-    packages=['.gmailconnector'],
+    keywords='stress-test, numpy-arrays, cpu-stress, memory-stress, multiprocessing',
+    packages=['.stress-injector'],
     install_requires=['']
 )
