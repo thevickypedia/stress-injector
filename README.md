@@ -8,7 +8,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress_injector)
 
 # Stress Injector
-Python script, to inject memory and CPU stress
+Python module, to inject memory and CPU stress
 
 ## Insights:
 
