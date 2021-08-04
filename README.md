@@ -33,6 +33,29 @@ Python module, to inject memory and CPU stress
 * The `size_converter` converts the bytes from resource usage to a human understandable format.
 
 
+
+## Pypi Module
+https://pypi.org/project/gmail-connector/
+
+### Usage
+`pip install stress-injector`
+
+<br>
+
+[CPU Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/cpu.py)
+```python
+from stressinjector.cpu import cpu_stress
+
+cpu_stress()
+```
+
+[Memory Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/memory.py)
+```python
+from stressinjector.memory import memory_stress
+
+memory_stress()
+```
+
 ### Coding Standards:
 Docstring format: [`Google`](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) <br>
 Styling conventions: [`PEP 8`](https://www.python.org/dev/peps/pep-0008/) <br>

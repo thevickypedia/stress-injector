@@ -9,7 +9,7 @@ from psutil import cpu_percent
 kill_signal = False
 
 
-def infinite() -> None:
+def _infinite() -> None:
     """Infinite loop to stress each core on the CPU for the number of logical cores available.
 
     See Also:
@@ -23,7 +23,7 @@ def infinite() -> None:
             sys.exit(0)
 
 
-def measure_cpu() -> None:
+def _measure_cpu() -> None:
     r"""Uses `cpu_percent()` to get the current CPU utilization and prints the utilization percentage on each core.
 
     Runs until the global variable `kill_signal` is set to True.
@@ -51,10 +51,10 @@ def measure_cpu() -> None:
     processors = sorted(processors, key=lambda x: x[1], reverse=True)  # sorts by CPU usage within the set in the list
 
     print('CPU Usage:')
-    [print(f'Core {processor + 1} - {format_number(usage)}%') for processor, usage in processors]
+    [print(f'Core {processor + 1} - {_format_number(usage)}%') for processor, usage in processors]
 
 
-def format_number(n) -> int:
+def _format_number(n) -> int:
     """Converts numbers with float value .0 to integers.
 
     Args:
@@ -82,9 +82,9 @@ def cpu_stress() -> None:
         - A relatively low performing machine may stall or be un-responsive when stress is induced for a long duration.
 
     References:
-        >>> infinite()
+        >>> _infinite()
             Triggers an infinite loop for the number of logical cores.
-        >>> measure_cpu()
+        >>> _measure_cpu()
             Measures the impact on each logical core in a dedicated thread.
     """
     global kill_signal
@@ -94,8 +94,8 @@ def cpu_stress() -> None:
         print(f'Stressing CPU cores for {waiter} seconds')
         processes = []
         for n in range(cpu_count()):
-            processes.append(Process(target=infinite))
-        measure = Thread(target=measure_cpu)
+            processes.append(Process(target=_infinite))
+        measure = Thread(target=_measure_cpu)
         [each_core.start() for each_core in processes]
         measure.start()
         sleep(waiter)

@@ -1,4 +1,4 @@
-from os import path
+from os.path import dirname, isfile, join, realpath, sep
 
 from setuptools import setup
 
@@ -15,8 +15,34 @@ classifiers = [
 
 
 def read(name):
-    """https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py - reference."""
-    return open(path.join(path.dirname(__file__), name)).read()
+    """Reads the file that was received as argument.
+
+    Args:
+        name: Name of the file that has to be opened and read.
+
+    Returns:
+        Content of the file that was read.
+
+    References:
+        https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py
+
+    """
+    with open(join(dirname(__file__), name)) as file:
+        content = file.read()
+    return content
+
+
+def dependencies() -> list:
+    """Gathers dependencies from requirements file.
+
+    Returns:
+        List of dependencies to be installed.
+    """
+    requirement_file = dirname(realpath(__file__)) + f'{sep}stressinjector{sep}requirements.txt'
+    if isfile(requirement_file):
+        with open(requirement_file) as requirements:
+            install_requires = requirements.read().splitlines()
+    return install_requires
 
 
 setup(
@@ -31,5 +57,5 @@ setup(
     classifiers=classifiers,
     keywords='stress-test, numpy-arrays, cpu-stress, memory-stress, multiprocessing',
     packages=['.stressinjector'],
-    install_requires=['']
+    install_requires=dependencies()
 )

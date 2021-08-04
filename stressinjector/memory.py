@@ -8,7 +8,7 @@ from psutil import Process, virtual_memory
 from tqdm import tqdm
 
 
-def stress(gb) -> str:
+def _stress(gb) -> str:
     """Generates `random bytes <https://numpy.org/doc/stable/reference/random/generated/numpy.random.bytes.html>`__.
 
     Bytes are generated with the multiple of 1024 ~ 1GB. Uses tqdm module to show a progress bar.
@@ -23,10 +23,10 @@ def stress(gb) -> str:
     mb2bytes = 1024 * 1024
     result = [bytes(mb2bytes) for _ in tqdm(range(gb), desc='Generating random bytes', unit=' bytes',
                                             leave=False)]
-    return f'Stress Injected: {size_converter(len(result) * mb2bytes)}'
+    return f'Stress Injected: {_size_converter(len(result) * mb2bytes)}'
 
 
-def memory_util_check() -> int:
+def _memory_util_check() -> int:
     """Returns memory used only the current script.
 
     Returns:
@@ -48,7 +48,7 @@ def memory_util_check() -> int:
         return process.memory_info().peak_wset
 
 
-def size_converter(byte_size) -> str:
+def _size_converter(byte_size) -> str:
     """Gets the current memory consumed and converts it to human friendly format.
 
     Args:
@@ -78,19 +78,19 @@ def memory_stress():
         - A low RAM equipped machine may stall or be un-responsive when stress is induced for a higher byte value.
 
     References:
-        >>> stress()
+        >>> _stress()
             Generates random bytes for 1024 times the number of GB value entered during prompt.
-        >>> size_converter()
+        >>> _size_converter()
             Converts bytes to human readable size format.
     """
-    current_memory = size_converter(virtual_memory().total)
+    current_memory = _size_converter(virtual_memory().total)
     desired_bytes = input(f"Enter the number of GBs to stress your memory: "
                           f"(Optimal for you: {round(float(current_memory.split()[0]) * 2)} GB)\n")
     gigabytes = int(desired_bytes) * 1024  # gigabytes to megabytes
     try:
         print(f'Stressing Memory with {desired_bytes} GB')
-        print(stress(gigabytes))
-        print(f'Memory Consumed: {size_converter(memory_util_check())}')
+        print(_stress(gigabytes))
+        print(f'Memory Consumed: {_size_converter(_memory_util_check())}')
     except KeyboardInterrupt:
         pass
 

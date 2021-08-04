@@ -15,3 +15,8 @@ Change Log
 ------------------
 - Roll back module name
 - Update badges in README.md
+
+0.0.4 (08/04/2021)
+------------------
+- Mark methods as internal
+- Update dependencies and readme
