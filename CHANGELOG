@@ -4,3 +4,9 @@ Change Log
 0.0.1 (08/04/2021)
 ------------------
 - Onboard stress-injector to pypi
+
+0.0.2 (08/04/2021)
+------------------
+- Update docs
+- Change module name
+- Fix broken references
