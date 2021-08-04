@@ -37,6 +37,7 @@ def _memory_util_check() -> int:
         MacOS:
             >>> getrusage(RUSAGE_SELF).ru_maxrss
                 `getrusage <https://docs.python.org/3/library/resource.html#resource.getrusage>`__
+
         Windows:
             >>> process.memory_info().peak_wset
     """
@@ -80,6 +81,7 @@ def memory_stress():
     References:
         >>> _stress()
             Generates random bytes for 1024 times the number of GB value entered during prompt.
+
         >>> _size_converter()
             Converts bytes to human readable size format.
     """

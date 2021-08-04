@@ -84,6 +84,7 @@ def cpu_stress() -> None:
     References:
         >>> _infinite()
             Triggers an infinite loop for the number of logical cores.
+
         >>> _measure_cpu()
             Measures the impact on each logical core in a dedicated thread.
     """

@@ -62,54 +62,13 @@
 </ul>
 </div>
 <p class="rubric">References</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">infinite</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_infinite</span><span class="p">()</span>
 <span class="go">    Triggers an infinite loop for the number of logical cores.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">measure_cpu</span><span class="p">()</span>
-<span class="go">    Measures the impact on each logical core in a dedicated thread.</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cpu.format_number">
-<span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">format_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cpu.format_number" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts numbers with float value .0 to integers.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>n</strong> – Raw numbers which is either a <cite>str</cite> or <cite>float</cite></p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Processed integers without any float value extensions in it.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cpu.infinite">
-<span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">infinite</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.infinite" title="Permalink to this definition">¶</a></dt>
-<dd><p>Infinite loop to stress each core on the CPU for the number of logical cores available.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>The loop runs on each core as this function is triggered by <cite>processing.Process</cite> which itself runs as a loop.</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cpu.measure_cpu">
-<span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">measure_cpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.measure_cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Uses <cite>cpu_percent()</cite> to get the current CPU utilization and prints the utilization percentage on each core.</p>
-<p>Runs until the global variable <cite>kill_signal</cite> is set to True.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p>The <cite>stdout</cite> is set to write and flush as the % value changes.</p></li>
-<li><p>This is done using the <cite>sys.stdout.write</cite> module which is set to work as expected only in an IDE.</p></li>
-<li><p>Sorry Terminal fans, but on the bright side,
-<cite>os.system(‘clear’)</cite> can be added right after <cite>sys.stdout.write(f’\r{output.strip()}’)</cite></p></li>
-</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_measure_cpu</span><span class="p">()</span>
+<span class="go">    Measures the impact on each logical core in a dedicated thread.</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -133,73 +92,14 @@
 </ul>
 </div>
 <p class="rubric">References</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stress</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_stress</span><span class="p">()</span>
 <span class="go">    Generates random bytes for 1024 times the number of GB value entered during prompt.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">size_converter</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_size_converter</span><span class="p">()</span>
 <span class="go">    Converts bytes to human readable size format.</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="memory.memory_util_check">
-<span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#memory.memory_util_check" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns memory used only the current script.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The memory used by the current process.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<dl>
-<dt>MacOS:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">getrusage</span><span class="p">(</span><span class="n">RUSAGE_SELF</span><span class="p">)</span><span class="o">.</span><span class="n">ru_maxrss</span>
-<span class="go">    `getrusage &lt;https://docs.python.org/3/library/resource.html#resource.getrusage&gt;`__</span>
-</pre></div>
-</div>
-</dd>
-<dt>Windows:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">process</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">peak_wset</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="memory.size_converter">
-<span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">size_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte_size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#memory.size_converter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the current memory consumed and converts it to human friendly format.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>byte_size</strong> – Receives byte size as argument.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Converted human understandable size.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="memory.stress">
-<span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">stress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gb</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#memory.stress" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.bytes.html">random bytes</a>.</p>
-<p>Bytes are generated with the multiple of 1024 ~ 1GB. Uses tqdm module to show a progress bar.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>gb</strong> – The number of <cite>GigaBytes</cite> of stress has be induced A.k.a random bytes have to be generated.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Calls the <cite>size_converter</cite> method to get the human readable size of stress that was induced.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>

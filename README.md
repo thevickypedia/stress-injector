@@ -32,15 +32,11 @@ Python module, to inject memory and CPU stress
 * I have then used `getrusage` (get resource usage) for `SELF` to get the memory consumed only by the current script.
 * The `size_converter` converts the bytes from resource usage to a human understandable format.
 
-
-
 ## Pypi Module
-https://pypi.org/project/gmail-connector/
+https://pypi.org/project/stress-injector/
 
 ### Usage
 `pip install stress-injector`
-
-<br>
 
 [CPU Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/cpu.py)
 ```python
@@ -63,6 +59,8 @@ Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/
 [`isort`](https://pycqa.github.io/isort/)
 
 ### Pre-Commit
+`python3 -m pip install sphinx pre-commit`
+
 `pre-commit` will run `flake8` and `isort` to ensure proper coding standards along with [docs_generator](gen_docs.sh) 
 to update the [runbook](#Runbook)
 > `pre-commit run --all-files`
@@ -77,3 +75,7 @@ https://thevickypedia.github.io/stress_injector/
 &copy; Vignesh Sivanandha Rao
 
 Licensed under the [MIT License](LICENSE)
+
+[comment]: <> (brew install gh)
+[comment]: <> (gh auth login)
+[comment]: <> (`gh release create 0.0.7 --notes-file CHANGELOG --title 'Automate releases'`)
