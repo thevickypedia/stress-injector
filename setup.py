@@ -20,7 +20,7 @@ def read(name):
 
 
 setup(
-    name='stressinjector',
+    name='stress-injector',
     version='.'.join(str(c) for c in version_info),
     description='Python module, to inject memory and CPU stress.',
     long_description=read('README.md') + '\n\n' + read('CHANGELOG'),

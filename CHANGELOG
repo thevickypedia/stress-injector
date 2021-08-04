@@ -10,3 +10,8 @@ Change Log
 - Update docs
 - Change module name
 - Fix broken references
+
+0.0.3 (08/04/2021)
+------------------
+- Roll back module name
+- Update badges in README.md

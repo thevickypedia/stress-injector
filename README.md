@@ -1,11 +1,16 @@
-###### Environments
-[![Docs](https://img.shields.io/docsrs/docs/latest)](https://thevickypedia.github.io/stress_injector/)
+[![Pypi-version](https://img.shields.io/pypi/v/stress-injector)](https://pypi.org/project/stress-injector)
+[![Pypi-py-version](https://img.shields.io/pypi/pyversions/stress-injector)](https://pypi.org/project/stress-injector)
 
-###### Activity
+![docs](https://github.com/thevickypedia/stress_injector/actions/workflows/docs.yml/badge.svg)
+![pypi](https://github.com/thevickypedia/stress_injector/actions/workflows/python-publish.yml/badge.svg)
+
+[![Pypi-format](https://img.shields.io/pypi/format/stress-injector)](https://pypi.org/project/stress-injector/#files)
+[![Pypi-status](https://img.shields.io/pypi/status/stress-injector)](https://pypi.org/project/stress-injector)
+
 ![Maintained](https://img.shields.io/maintenance/yes/2021)
 [![GitHub Repo created](https://img.shields.io/date/1599432310)](https://api.github.com/repos/thevickypedia/stress_injector)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress_injector)
-[![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress_injector)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress-injector)
+[![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress-injector)
 
 # Stress Injector
 Python module, to inject memory and CPU stress
