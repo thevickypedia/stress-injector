@@ -44,41 +44,124 @@
 </section>
 <section id="module-cpu">
 <span id="stressinjector-cpu-stress"></span><h1>StressInjector - CPU Stress<a class="headerlink" href="#module-cpu" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="cpu.cpu_stress">
-<span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">cpu_stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.cpu_stress" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="cpu.CPUStress">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">CPUStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpu.CPUStress" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://git.io/JW70u">Controller</a> for CPU stress using multiprocessing. Gets duration as user input.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CPUStress</span>
+</pre></div>
+</div>
 <p>CPU is stressed using <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#the-process-class">multiprocessing.Process</a> to run the infinite loop on each process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seconds</strong> – [Optional] The number of seconds for which the logical cores have to be stressed.
+If no value is provided, there will be a prompt to enter an integer value.</p>
+</dd>
+</dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>Suggests a duration (in seconds) that is 5 times the # of logical cores present.</p>
+<p>Suggests a duration (in seconds) that is 5 times the number of logical cores present.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <ul class="simple">
 <li><p>DO heed the optimal value suggested before entering the input duration.</p></li>
 <li><p>CPU stress is induced in real time.</p></li>
-<li><p>A relatively low performing machine may stall or be un-responsive when stress is induced for a long duration.</p></li>
+<li><p>A relatively low performing machine may stall when stress is induced for a long duration.</p></li>
 </ul>
 </div>
 <p class="rubric">References</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_infinite</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CPUStress</span><span class="o">.</span><span class="n">infinite</span><span class="p">()</span>
 <span class="go">    Triggers an infinite loop for the number of logical cores.</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_measure_cpu</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CPUStress</span><span class="o">.</span><span class="n">measure_cpu</span><span class="p">()</span>
 <span class="go">    Measures the impact on each logical core in a dedicated thread.</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cpu.CPUStress.format_number">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">format_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cpu.CPUStress.format_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts numbers with float value .0 to integers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – Raw numbers which is either a <cite>str</cite> or <cite>float</cite></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Processed integers without any float value extensions in it.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cpu.CPUStress.infinite">
+<span class="sig-name descname"><span class="pre">infinite</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.CPUStress.infinite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Infinite loop to stress each core on the CPU for the number of logical cores available.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The loop runs on each core as this function is triggered by <code class="docutils literal notranslate"><span class="pre">processing.Process</span></code> that runs as a loop.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cpu.CPUStress.measure_cpu">
+<span class="sig-name descname"><span class="pre">measure_cpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.CPUStress.measure_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses <cite>cpu_percent()</cite> to get the current CPU utilization and prints the utilization percentage on each core.</p>
+<p>Runs until the current time reaches 3 seconds in addition to the user input.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>The <cite>stdout</cite> is set to write and flush as the % value changes.</p></li>
+<li><p>This is done using the <code class="docutils literal notranslate"><span class="pre">sys.stdout.write</span></code> module which is set to work as expected only in an IDE.</p></li>
+<li><p>Sorry Terminal fans, but on the bright side,
+<code class="docutils literal notranslate"><span class="pre">os.system('clear')</span></code> can be added right after <code class="docutils literal notranslate"><span class="pre">sys.stdout.write(f'\\r{output.strip()}')</span></code></p></li>
+<li><p>Uses transpose matrix, so first list will have all usage % of core1 and so on.</p></li>
+<li><p>Gets the maximum of each list to convert matrix to list.</p></li>
+<li><p>Creates a list of index values and CPU usage in a set.</p></li>
+<li><p>Sorts by CPU usage within the set in the list.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cpu.CPUStress.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.CPUStress.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiator for stress injector.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">infinite</span></span></dt>
+<dd><p>To kick off stress injector.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">measure</span></span></dt>
+<dd><p>To measure the usage in the background running in a dedicated thread.</p>
+</dd></dl>
+
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="module-memory">
 <span id="stressinjector-memory-stress"></span><h1>StressInjector - Memory Stress<a class="headerlink" href="#module-memory" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="memory.memory_stress">
-<span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">memory_stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#memory.memory_stress" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="memory.MemoryStress">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">MemoryStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gigabytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://git.io/JW70h">Controller</a> to trigger the memory stress. Gets number of GBs as user input.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gigabytes</strong> – [Optional] The number of gigabytes for which the memory has to be stressed.
+If no value is provided, there will be a prompt to enter an integer value.</p>
+</dd>
+</dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>Suggests twice the amount of physical memory.</p>
@@ -92,14 +175,93 @@
 </ul>
 </div>
 <p class="rubric">References</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_stress</span><span class="p">()</span>
-<span class="go">    Generates random bytes for 1024 times the number of GB value entered during prompt.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span><span class="o">.</span><span class="n">stress</span><span class="p">()</span>
+<span class="go">    Generates ``random bytes``, 1024 times the ``GigaBytes`` value entered during prompt or class intialization.</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">_size_converter</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span><span class="o">.</span><span class="n">size_converter</span><span class="p">()</span>
 <span class="go">    Converts bytes to human readable size format.</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="memory.MemoryStress.memory_util_check">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#memory.MemoryStress.memory_util_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns memory used only the current script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The memory used by the current process.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl>
+<dt>MacOS:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">getrusage</span><span class="p">(</span><span class="n">RUSAGE_SELF</span><span class="p">)</span><span class="o">.</span><span class="n">ru_maxrss</span>
+<span class="go">    `getrusage &lt;https://docs.python.org/3/library/resource.html#resource.getrusage&gt;`__</span>
+</pre></div>
+</div>
+</dd>
+<dt>Windows:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">process</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">peak_wset</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="memory.MemoryStress.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiator for stress injector. Converts GigaBytes to Bytes.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">stress</span></span></dt>
+<dd><p>To kick off stress injector with the desired bytes converted from user input.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">memory_util_check</span></span></dt>
+<dd><p>To measure the usage post completion.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="memory.MemoryStress.size_converter">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">size_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte_size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#memory.MemoryStress.size_converter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current memory consumed and converts it to human friendly format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>byte_size</strong> – Receives byte size as argument.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Converted human understandable size.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="memory.MemoryStress.stress">
+<span class="sig-name descname"><span class="pre">stress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mb</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#memory.MemoryStress.stress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.bytes.html">random bytes</a>.</p>
+<p>Bytes are generated with the multiple of 1024 ~ 1GB. Uses tqdm module to show a progress bar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mb</strong> – The number of <code class="docutils literal notranslate"><span class="pre">MegaBytes</span></code> of stress has be induced A.k.a random bytes have to be generated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Calls the <code class="docutils literal notranslate"><span class="pre">size_converter</span></code> method to get the human readable size of stress that was induced.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>

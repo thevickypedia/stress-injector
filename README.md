@@ -18,13 +18,13 @@ Python module, to inject memory and CPU stress
 ## Insights:
 
 ### CPU Stress:
-* To achieve CPU stress, I have used multiprocess, looped for the # of logical cores, triggering an infinite loop on
+* To achieve CPU stress, I have used multiprocess, looped for the number of logical cores, triggering an infinite loop on
   each core.
-* The infinite loop will run for a given # of seconds provided by user.
-* Mean-while the `cpu_percent` from `psutil` runs (dedicated thread) in an infinite loop with kill signal set to `False`
-  calculating the current CPU utilization on each CPU core.
-* Once the given # of seconds have passed, the `kill_signal` is set to `True` and some painful steps to _gracefully_
-  stop the `multiprocess` and multi-thread.
+* The infinite loop will run for a given number of seconds provided by user.
+* Mean-while the `cpu_percent` from `psutil` runs (dedicated thread) in an infinite loop calculating the current CPU 
+  utilization on each CPU core.
+* The dedicated thread runs for 3 seconds in addition to the number of seconds provided by the user.
+* Once the given number of seconds have passed, the `multiprocess` and `thread` that was initiated to monitor CPU usage are stopped.
 
 ### Memory Stress:
 * In this script, I have used `numpy.random.bytes` which are sampled from uniform distribution.
@@ -40,16 +40,20 @@ https://pypi.org/project/stress-injector/
 
 [CPU Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/cpu.py)
 ```python
-from stressinjector.cpu import cpu_stress
+from stressinjector.cpu import CPUStress
 
-cpu_stress()
+CPUStress().run()  # will trigger a prompt asking for the number of seconds to be stressed.
+# OR
+CPUStress(seconds=60).run()  # will run stress on all available logical cores for 60 seconds without a prompt.
 ```
 
 [Memory Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/memory.py)
 ```python
-from stressinjector.memory import memory_stress
+from stressinjector.memory import MemoryStress
 
-memory_stress()
+MemoryStress().run()  # will trigger a prompt asking for the number of gigabytes to be stressed.
+# OR
+MemoryStress(gigabytes=10).run()  # will run stress on the memory unit with 10 GigaBytes without a prompt.
 ```
 
 ### Coding Standards:

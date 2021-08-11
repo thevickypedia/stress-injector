@@ -20,3 +20,11 @@ Change Log
 ------------------
 - Mark methods as internal
 - Update dependencies and readme
+
+0.0.5 (08/11/2021)
+------------------
+- Fix broken CPU stress because of global variable
+- Wrap everything inside a class
+- Add an option to pass the user input when the class is initialized
+- Update dependencies, docs and readme
+- Update variable names to right convention
