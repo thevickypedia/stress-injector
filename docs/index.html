@@ -54,8 +54,11 @@
 <p>CPU is stressed using <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#the-process-class">multiprocessing.Process</a> to run the infinite loop on each process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>seconds</strong> – [Optional] The number of seconds for which the logical cores have to be stressed.
-If no value is provided, there will be a prompt to enter an integer value.</p>
+<dd class="field-odd"><p><strong>seconds [Optional]</strong> –</p>
+<ul class="simple">
+<li><p>The number of seconds for which the logical cores have to be stressed.</p></li>
+<li><p>If no value is provided, there will be a prompt to enter an integer value.</p></li>
+</ul>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -109,15 +112,16 @@ If no value is provided, there will be a prompt to enter an integer value.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cpu.CPUStress.measure_cpu">
 <span class="sig-name descname"><span class="pre">measure_cpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cpu.CPUStress.measure_cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Uses <cite>cpu_percent()</cite> to get the current CPU utilization and prints the utilization percentage on each core.</p>
-<p>Runs until the current time reaches 3 seconds in addition to the user input.</p>
+<dd><p>Uses <code class="docutils literal notranslate"><span class="pre">cpu_percent()</span></code> to get the current CPU utilization and print the utilization percentage on each core.</p>
+<p>Runs in a forever loop. Stops when the flag <code class="docutils literal notranslate"><span class="pre">stop_thread</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <ul class="simple">
 <li><p>The <cite>stdout</cite> is set to write and flush as the % value changes.</p></li>
-<li><p>This is done using the <code class="docutils literal notranslate"><span class="pre">sys.stdout.write</span></code> module which is set to work as expected only in an IDE.</p></li>
-<li><p>Sorry Terminal fans, but on the bright side,
-<code class="docutils literal notranslate"><span class="pre">os.system('clear')</span></code> can be added right after <code class="docutils literal notranslate"><span class="pre">sys.stdout.write(f'\\r{output.strip()}')</span></code></p></li>
+<li><p>This is done using the recursive flag <code class="docutils literal notranslate"><span class="pre">\r</span></code> in <code class="docutils literal notranslate"><span class="pre">sys.stdout.write</span></code> module which is set to work as
+expected only in an IDE.</p></li>
+<li><p>Sorry Terminal fans, but on the bright side, <code class="docutils literal notranslate"><span class="pre">os.system('clear')</span></code> can be added right after
+<code class="docutils literal notranslate"><span class="pre">sys.stdout.write(f'\r{output.strip()}')</span></code></p></li>
 <li><p>Uses transpose matrix, so first list will have all usage % of core1 and so on.</p></li>
 <li><p>Gets the maximum of each list to convert matrix to list.</p></li>
 <li><p>Creates a list of index values and CPU usage in a set.</p></li>
@@ -158,8 +162,11 @@ If no value is provided, there will be a prompt to enter an integer value.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>gigabytes</strong> – [Optional] The number of gigabytes for which the memory has to be stressed.
-If no value is provided, there will be a prompt to enter an integer value.</p>
+<dd class="field-odd"><p><strong>gigabytes [Optional]</strong> –</p>
+<ul class="simple">
+<li><p>The number of gigabytes for which the memory has to be stressed.</p></li>
+<li><p>If no value is provided, there will be a prompt to enter an integer value.</p></li>
+</ul>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -176,13 +183,17 @@ If no value is provided, there will be a prompt to enter an integer value.</p>
 </div>
 <p class="rubric">References</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span><span class="o">.</span><span class="n">stress</span><span class="p">()</span>
-<span class="go">    Generates ``random bytes``, 1024 times the ``GigaBytes`` value entered during prompt or class intialization.</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p>Generates <code class="docutils literal notranslate"><span class="pre">random</span> <span class="pre">bytes</span></code>, 1024 times the <code class="docutils literal notranslate"><span class="pre">GigaBytes</span></code> value entered during prompt or class intialization.</p>
+</div></blockquote>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span><span class="o">.</span><span class="n">size_converter</span><span class="p">()</span>
-<span class="go">    Converts bytes to human readable size format.</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p>Converts <code class="docutils literal notranslate"><span class="pre">bytes</span></code> to human readable size format.</p>
+</div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="memory.MemoryStress.memory_util_check">
 <em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#memory.MemoryStress.memory_util_check" title="Permalink to this definition">¶</a></dt>
@@ -198,20 +209,21 @@ If no value is provided, there will be a prompt to enter an integer value.</p>
 <p class="rubric">References</p>
 <dl>
 <dt>MacOS:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">getrusage</span><span class="p">(</span><span class="n">RUSAGE_SELF</span><span class="p">)</span><span class="o">.</span><span class="n">ru_maxrss</span>
-<span class="go">    `getrusage &lt;https://docs.python.org/3/library/resource.html#resource.getrusage&gt;`__</span>
 </pre></div>
 </div>
+<p><a class="reference external" href="https://docs.python.org/3/library/resource.html#resource.getrusage">getrusage</a></p>
 </dd>
 <dt>Windows:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">process</span><span class="o">.</span><span class="n">memory_info</span><span class="p">()</span><span class="o">.</span><span class="n">peak_wset</span>
 </pre></div>
 </div>
+<p><a class="reference external" href="https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_info">memory_info</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="memory.MemoryStress.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress.run" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#memory.MemoryStress.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiator for stress injector. Converts GigaBytes to Bytes.</p>
 <dl class="py method">
 <dt class="sig sig-object py">

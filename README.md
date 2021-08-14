@@ -66,7 +66,7 @@ Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/
 `python3 -m pip install sphinx pre-commit`
 
 `pre-commit` will run `flake8` and `isort` to ensure proper coding standards along with [docs_generator](gen_docs.sh) 
-to update the [runbook](#Runbook)
+to update the [runbook](https://github.com/thevickypedia/stress_injector#readme)
 > `pre-commit run --all-files`
 
 ### Runbook:

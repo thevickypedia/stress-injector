@@ -2,6 +2,8 @@ from math import floor, log, pow
 from os import getpid
 from platform import system
 from resource import RUSAGE_SELF, getrusage
+from sys import stdout
+from time import sleep
 
 from numpy.random import bytes
 from psutil import Process, virtual_memory
@@ -14,8 +16,9 @@ class MemoryStress:
     >>> MemoryStress
 
     Args:
-        gigabytes: [Optional] The number of gigabytes for which the memory has to be stressed.
-            If no value is provided, there will be a prompt to enter an integer value.
+        gigabytes [Optional]:
+            - The number of gigabytes for which the memory has to be stressed.
+            - If no value is provided, there will be a prompt to enter an integer value.
 
     See Also:
         Suggests twice the amount of physical memory.
@@ -27,10 +30,12 @@ class MemoryStress:
 
     References:
         >>> MemoryStress.stress()
+
             Generates ``random bytes``, 1024 times the ``GigaBytes`` value entered during prompt or class intialization.
 
         >>> MemoryStress.size_converter()
-            Converts bytes to human readable size format.
+
+            Converts ``bytes`` to human readable size format.
     """
     def __init__(self, gigabytes: int = None):
         current_memory = self.size_converter(virtual_memory().total)
@@ -68,10 +73,13 @@ class MemoryStress:
         References:
             MacOS:
                 >>> getrusage(RUSAGE_SELF).ru_maxrss
-                    `getrusage <https://docs.python.org/3/library/resource.html#resource.getrusage>`__
+
+                `getrusage <https://docs.python.org/3/library/resource.html#resource.getrusage>`__
 
             Windows:
                 >>> process.memory_info().peak_wset
+
+                `memory_info <https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_info>`__
         """
         operating_system = system()
         if operating_system == 'Darwin':
@@ -98,7 +106,7 @@ class MemoryStress:
         response = str(size) + ' ' + size_name[integer]
         return response
 
-    def run(self):
+    def run(self) -> None:
         """Initiator for stress injector. Converts GigaBytes to Bytes.
 
         Methods:
@@ -107,12 +115,14 @@ class MemoryStress:
         """
         megabytes = int(self.gigabytes) * 1024  # gigabytes to megabytes
         try:
-            print(f'Stressing Memory with {self.gigabytes} GB')
-            print(self.stress(mb=megabytes))
-            print(f'Memory Consumed: {self.size_converter(self.memory_util_check())}')
+            stdout.write(f'\rStressing Memory with {self.gigabytes} GB')
+            sleep(1)
+            stdout.write(self.stress(mb=megabytes) + '\n')
         except KeyboardInterrupt:
-            pass
+            stdout.write('\rManual interrupt received. Stopping stress.\n')
+            sleep(1)
+        print(f'Actual memory Consumed: {self.size_converter(self.memory_util_check())}')
 
 
 if __name__ == '__main__':
-    MemoryStress(gigabytes=10).run()
+    MemoryStress(gigabytes=1).run()

@@ -1,6 +1,6 @@
-import sys
 from multiprocessing import Process
 from os import cpu_count
+from sys import stdout
 from threading import Thread
 from time import sleep, time
 
@@ -16,8 +16,9 @@ class CPUStress:
     the-process-class>`__ to run the infinite loop on each process.
 
     Args:
-        seconds: [Optional] The number of seconds for which the logical cores have to be stressed.
-            If no value is provided, there will be a prompt to enter an integer value.
+        seconds [Optional]:
+            - The number of seconds for which the logical cores have to be stressed.
+            - If no value is provided, there will be a prompt to enter an integer value.
 
     See Also:
         Suggests a duration (in seconds) that is 5 times the number of logical cores present.
@@ -34,6 +35,7 @@ class CPUStress:
         >>> CPUStress.measure_cpu()
             Measures the impact on each logical core in a dedicated thread.
     """
+
     def __init__(self, seconds: int = None):
         self.cores = cpu_count()
         if seconds:
@@ -41,6 +43,7 @@ class CPUStress:
         else:
             self.seconds = int(input(f'Enter the number of seconds to stress your CPU cores: '
                                      f'(Optimal for you: {self.cores * 5} secs)\n'))
+        self.start_time = None
 
     def infinite(self) -> None:
         """Infinite loop to stress each core on the CPU for the number of logical cores available.
@@ -53,39 +56,49 @@ class CPUStress:
                 for _ in range(self.cores):
                     pass
             except KeyboardInterrupt:
-                sys.exit(0)
+                return
 
     def measure_cpu(self) -> None:
-        r"""Uses `cpu_percent()` to get the current CPU utilization and prints the utilization percentage on each core.
+        r"""Uses ``cpu_percent()`` to get the current CPU utilization and print the utilization percentage on each core.
 
-        Runs until the current time reaches 3 seconds in addition to the user input.
+        Runs in a forever loop. Stops when the flag ``stop_thread`` is set to ``True``.
 
         See Also:
             - The `stdout` is set to write and flush as the % value changes.
-            - This is done using the ``sys.stdout.write`` module which is set to work as expected only in an IDE.
-            - Sorry Terminal fans, but on the bright side,
-              ``os.system('clear')`` can be added right after ``sys.stdout.write(f'\\r{output.strip()}')``
+            - This is done using the recursive flag ``\r`` in ``sys.stdout.write`` module which is set to work as
+              expected only in an IDE.
+            - Sorry Terminal fans, but on the bright side, ``os.system('clear')`` can be added right after
+              ``sys.stdout.write(f'\r{output.strip()}')``
             - Uses transpose matrix, so first list will have all usage % of core1 and so on.
             - Gets the maximum of each list to convert matrix to list.
             - Creates a list of index values and CPU usage in a set.
             - Sorts by CPU usage within the set in the list.
         """
-        end_time = time() + self.seconds + 3
+        # noinspection PyGlobalUndefined
+        global stop_thread
         processors = []
-        while time() <= end_time:
+        while True:
             cpu_util = cpu_percent(interval=1, percpu=True)
             processors.append(cpu_util)  # stores the list of usage % as a list within a list
             output = ''
             for index, percent in enumerate(cpu_util):
                 output += f'Core {index + 1}: {percent}%\t'
-            sys.stdout.write(f'\r{output.strip()}')
-        sys.stdout.write('\r')  # flushes the screen output
+            stdout.write(f'\r{output.strip()}')
+            if stop_thread:
+                break
+        stdout.write('\r')  # flushes the screen output
         processors = map(list, zip(*processors))
         processors = [max(processor) for processor in processors]
         processors = list(enumerate(processors))
         processors = sorted(processors, key=lambda x: x[1], reverse=True)
 
-        print('CPU Usage:')
+        if self.start_time and (run_time := round(time() - self.start_time)):
+            if (stop_when := self.seconds - run_time) and stop_when > 0:
+                print(f'Actual runtime: {run_time} seconds. Stopped {stop_when} seconds early.')
+        else:
+            print('Stress Test was stopped before it began.')
+
+        print('CPU Usage Report:')
         [print(f'Core {processor + 1} - {self.format_number(usage)}%') for processor, usage in processors]
 
     @classmethod
@@ -108,21 +121,28 @@ class CPUStress:
             - infinite: To kick off stress injector.
             - measure: To measure the usage in the background running in a dedicated thread.
         """
+        # noinspection PyGlobalUndefined
+        global stop_thread
         try:
-            print(f'Stressing CPU cores for {self.seconds} seconds')
+            stdout.write(f'\rStressing CPU cores for {self.seconds} seconds')
             processes = []
             for n in range(self.cores):
                 processes.append(Process(target=self.infinite))
+            stop_thread = False
             measure = Thread(target=self.measure_cpu)
-            [each_core.start() for each_core in processes]
             measure.start()
+            sleep(1)
+            self.start_time = time()
+            [each_core.start() for each_core in processes]
             sleep(self.seconds)
             [each_core.terminate() for each_core in processes]
             [each_core.join() for each_core in processes]
-            sleep(2)
+            sleep(1)
+            stop_thread = True
             measure.join()
         except KeyboardInterrupt:
-            pass
+            stdout.write('\rManual interrupt received. Stopping stress.')
+            stop_thread = True
 
 
 if __name__ == '__main__':

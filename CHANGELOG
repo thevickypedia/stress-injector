@@ -28,3 +28,11 @@ Change Log
 - Add an option to pass the user input when the class is initialized
 - Update dependencies, docs and readme
 - Update variable names to right convention
+
+0.0.6 (08/14/2021)
+------------------
+- Stop the thread that measures CPU usage during a manual interrupt
+- Previously CPUStress measurement used to run until the current time reaches 3 seconds in addition to the user input.
+- Since the measurement runs in a dedicated thread this, stopping stress never stopped the usage display.
+- Now CPUStress measurement will stop when a manual interrupt is received using a stop_flag variable.
+- Update docs and README.md internal link.
