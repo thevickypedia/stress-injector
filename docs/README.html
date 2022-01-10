@@ -43,14 +43,14 @@
             
   <p><a class="reference external" href="https://pypi.org/project/stress-injector"><img alt="Pypi-version" src="https://img.shields.io/pypi/v/stress-injector" /></a>
 <a class="reference external" href="https://pypi.org/project/stress-injector"><img alt="Pypi-py-version" src="https://img.shields.io/pypi/pyversions/stress-injector" /></a></p>
-<p><img alt="docs" src="https://github.com/thevickypedia/stress_injector/actions/workflows/docs.yml/badge.svg" />
-<img alt="pypi" src="https://github.com/thevickypedia/stress_injector/actions/workflows/python-publish.yml/badge.svg" /></p>
+<p><img alt="docs" src="https://github.com/thevickypedia/stress-injector/actions/workflows/docs.yml/badge.svg" />
+<img alt="pypi" src="https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml/badge.svg" /></p>
 <p><a class="reference external" href="https://pypi.org/project/stress-injector/#files"><img alt="Pypi-format" src="https://img.shields.io/pypi/format/stress-injector" /></a>
 <a class="reference external" href="https://pypi.org/project/stress-injector"><img alt="Pypi-status" src="https://img.shields.io/pypi/status/stress-injector" /></a></p>
 <p><img alt="Maintained" src="https://img.shields.io/maintenance/yes/2022" />
-<a class="reference external" href="https://api.github.com/repos/thevickypedia/stress_injector"><img alt="GitHub Repo created" src="https://img.shields.io/date/1599432310" /></a>
-<a class="reference external" href="https://api.github.com/repos/thevickypedia/stress-injector"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/thevickypedia/stress_injector" /></a>
-<a class="reference external" href="https://api.github.com/repos/thevickypedia/stress-injector"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/thevickypedia/stress_injector" /></a></p>
+<a class="reference external" href="https://api.github.com/repos/thevickypedia/stress-injector"><img alt="GitHub Repo created" src="https://img.shields.io/date/1599432310" /></a>
+<a class="reference external" href="https://api.github.com/repos/thevickypedia/stress-injector"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/thevickypedia/stress-injector" /></a>
+<a class="reference external" href="https://api.github.com/repos/thevickypedia/stress-injector"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/thevickypedia/stress-injector" /></a></p>
 <section id="stress-injector">
 <h1>Stress Injector<a class="headerlink" href="#stress-injector" title="Permalink to this headline">¶</a></h1>
 <p>Python module, to inject memory and CPU stress</p>
@@ -76,7 +76,7 @@ utilization on each CPU core.</p></li>
 <section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">stress-injector</span></code></p>
-<p><a class="reference external" href="https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/cpu.py">CPU Stress</a></p>
+<p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/cpu.py">CPU Stress</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stressinjector.cpu</span> <span class="kn">import</span> <span class="n">CPUStress</span>
 
 <span class="n">CPUStress</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># will trigger a prompt asking for the number of seconds to be stressed.</span>
@@ -84,7 +84,7 @@ utilization on each CPU core.</p></li>
 <span class="n">CPUStress</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># will run stress on all available logical cores for 60 seconds without a prompt.</span>
 </pre></div>
 </div>
-<p><a class="reference external" href="https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/memory.py">Memory Stress</a></p>
+<p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py">Memory Stress</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stressinjector.memory</span> <span class="kn">import</span> <span class="n">MemoryStress</span>
 
 <span class="n">MemoryStress</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># will trigger a prompt asking for the number of gigabytes to be stressed.</span>
@@ -118,13 +118,13 @@ Clean code with pre-commit hooks: <a class="reference external" href="https://fl
 <section id="runbook">
 <h3>Runbook<a class="headerlink" href="#runbook" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html"><img alt="made-with-sphinx-doc" src="https://img.shields.io/badge/Code%20Docs-Sphinx-1f425f.svg" /></a></p>
-<p><a class="reference external" href="https://thevickypedia.github.io/stress_injector/">https://thevickypedia.github.io/stress_injector/</a></p>
+<p><a class="reference external" href="https://thevickypedia.github.io/stress-injector/">https://thevickypedia.github.io/stress-injector/</a></p>
 </section>
 </section>
 <section id="license-copyright">
 <h2>License &amp; copyright<a class="headerlink" href="#license-copyright" title="Permalink to this headline">¶</a></h2>
 <p>© Vignesh Sivanandha Rao</p>
-<p>Licensed under the <a class="reference external" href="https://github.com/thevickypedia/stress_injector/blob/main/LICENSE">MIT License</a></p>
+<p>Licensed under the <a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/LICENSE">MIT License</a></p>
 </section>
 </section>
 

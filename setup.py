@@ -50,7 +50,7 @@ setup(
     version='.'.join(str(c) for c in version_info),
     description='Python module, to inject memory and CPU stress.',
     long_description=read('README.md') + '\n\n' + read('CHANGELOG'),
-    url='https://github.com/thevickypedia/stress_injector',
+    url='https://github.com/thevickypedia/stress-injector',
     author='Vignesh Sivanandha Rao',
     author_email='svignesh1793@gmail.com',
     License='MIT',

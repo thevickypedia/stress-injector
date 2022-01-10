@@ -1,16 +1,16 @@
 [![Pypi-version](https://img.shields.io/pypi/v/stress-injector)](https://pypi.org/project/stress-injector)
 [![Pypi-py-version](https://img.shields.io/pypi/pyversions/stress-injector)](https://pypi.org/project/stress-injector)
 
-![docs](https://github.com/thevickypedia/stress_injector/actions/workflows/docs.yml/badge.svg)
-![pypi](https://github.com/thevickypedia/stress_injector/actions/workflows/python-publish.yml/badge.svg)
+![docs](https://github.com/thevickypedia/stress-injector/actions/workflows/docs.yml/badge.svg)
+![pypi](https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml/badge.svg)
 
 [![Pypi-format](https://img.shields.io/pypi/format/stress-injector)](https://pypi.org/project/stress-injector/#files)
 [![Pypi-status](https://img.shields.io/pypi/status/stress-injector)](https://pypi.org/project/stress-injector)
 
 ![Maintained](https://img.shields.io/maintenance/yes/2022)
-[![GitHub Repo created](https://img.shields.io/date/1599432310)](https://api.github.com/repos/thevickypedia/stress_injector)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress-injector)
-[![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress_injector)](https://api.github.com/repos/thevickypedia/stress-injector)
+[![GitHub Repo created](https://img.shields.io/date/1599432310)](https://api.github.com/repos/thevickypedia/stress-injector)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/stress-injector)](https://api.github.com/repos/thevickypedia/stress-injector)
+[![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress-injector)](https://api.github.com/repos/thevickypedia/stress-injector)
 
 # Stress Injector
 Python module, to inject memory and CPU stress
@@ -35,7 +35,7 @@ Python module, to inject memory and CPU stress
 ### Usage
 `pip install stress-injector`
 
-[CPU Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/cpu.py)
+[CPU Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/cpu.py)
 ```python
 from stressinjector.cpu import CPUStress
 
@@ -44,7 +44,7 @@ CPUStress().run()  # will trigger a prompt asking for the number of seconds to b
 CPUStress(seconds=60).run()  # will run stress on all available logical cores for 60 seconds without a prompt.
 ```
 
-[Memory Stress](https://github.com/thevickypedia/stress_injector/blob/main/stressinjector/memory.py)
+[Memory Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py)
 ```python
 from stressinjector.memory import MemoryStress
 
@@ -78,13 +78,13 @@ Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/
 ### Runbook
 [![made-with-sphinx-doc](https://img.shields.io/badge/Code%20Docs-Sphinx-1f425f.svg)](https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html)
 
-[https://thevickypedia.github.io/stress_injector/](https://thevickypedia.github.io/stress_injector/)
+[https://thevickypedia.github.io/stress-injector/](https://thevickypedia.github.io/stress-injector/)
 
 ## License & copyright
 
 &copy; Vignesh Sivanandha Rao
 
-Licensed under the [MIT License](https://github.com/thevickypedia/stress_injector/blob/main/LICENSE)
+Licensed under the [MIT License](https://github.com/thevickypedia/stress-injector/blob/main/LICENSE)
 
 [comment]: <> (brew install gh)
 [comment]: <> (gh auth login)
