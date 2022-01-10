@@ -16,7 +16,7 @@ class MemoryStress:
     >>> MemoryStress
 
     Args:
-        gigabytes [Optional]:
+        gigabytes:
             - The number of gigabytes for which the memory has to be stressed.
             - If no value is provided, there will be a prompt to enter an integer value.
 
@@ -35,7 +35,7 @@ class MemoryStress:
 
         >>> MemoryStress.size_converter()
 
-            Converts ``bytes`` to human readable size format.
+            Converts ``bytes`` to human-readable size format.
     """
     def __init__(self, gigabytes: int = None):
         current_memory = self.size_converter(virtual_memory().total)

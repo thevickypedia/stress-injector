@@ -8,7 +8,9 @@ Welcome to Stress Injector's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Read Me:
+
+   README
 
 StressInjector - CPU Stress
 ==============================

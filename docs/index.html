@@ -16,7 +16,8 @@
     <script src="_static/doctools.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Stress Injector" href="README.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,6 +28,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Stress Injector"
+             accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Stress Injector  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Welcome to Stress Injector’s documentation!</a></li> 
       </ul>
@@ -40,13 +44,21 @@
   <section id="welcome-to-stress-injector-s-documentation">
 <h1>Welcome to Stress Injector’s documentation!<a class="headerlink" href="#welcome-to-stress-injector-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Stress Injector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#insights">Insights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#license-copyright">License &amp; copyright</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
 <section id="module-cpu">
 <span id="stressinjector-cpu-stress"></span><h1>StressInjector - CPU Stress<a class="headerlink" href="#module-cpu" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cpu.CPUStress">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">CPUStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpu.CPUStress" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">CPUStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpu.CPUStress" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://git.io/JW70u">Controller</a> for CPU stress using multiprocessing. Gets duration as user input.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CPUStress</span>
 </pre></div>
@@ -84,7 +96,7 @@
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="cpu.CPUStress.format_number">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">format_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cpu.CPUStress.format_number" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cpu.CPUStress.format_number" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts numbers with float value .0 to integers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -155,14 +167,14 @@ expected only in an IDE.</p></li>
 <span id="stressinjector-memory-stress"></span><h1>StressInjector - Memory Stress<a class="headerlink" href="#module-memory" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="memory.MemoryStress">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">MemoryStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gigabytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">MemoryStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gigabytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://git.io/JW70h">Controller</a> to trigger the memory stress. Gets number of GBs as user input.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>gigabytes [Optional]</strong> –</p>
+<dd class="field-odd"><p><strong>gigabytes</strong> –</p>
 <ul class="simple">
 <li><p>The number of gigabytes for which the memory has to be stressed.</p></li>
 <li><p>If no value is provided, there will be a prompt to enter an integer value.</p></li>
@@ -192,11 +204,11 @@ expected only in an IDE.</p></li>
 </pre></div>
 </div>
 <blockquote>
-<div><p>Converts <code class="docutils literal notranslate"><span class="pre">bytes</span></code> to human readable size format.</p>
+<div><p>Converts <code class="docutils literal notranslate"><span class="pre">bytes</span></code> to human-readable size format.</p>
 </div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="memory.MemoryStress.memory_util_check">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#memory.MemoryStress.memory_util_check" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#memory.MemoryStress.memory_util_check" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns memory used only the current script.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -241,7 +253,7 @@ expected only in an IDE.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="memory.MemoryStress.size_converter">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">size_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte_size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#memory.MemoryStress.size_converter" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte_size</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#memory.MemoryStress.size_converter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the current memory consumed and converts it to human friendly format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -301,6 +313,9 @@ expected only in an IDE.</p></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
+  <h4>Next topic</h4>
+  <p class="topless"><a href="README.html"
+                        title="next chapter">Stress Injector</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -331,13 +346,16 @@ expected only in an IDE.</p></li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Stress Injector"
+             >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Stress Injector  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Welcome to Stress Injector’s documentation!</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Vignesh Sivanandha Rao.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>
