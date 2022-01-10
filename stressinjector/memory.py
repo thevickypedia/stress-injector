@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 
 class MemoryStress:
-    """`Controller <https://git.io/JW70h>`__ to trigger the memory stress. Gets number of GBs as user input.
+    """`Controller <https://git.io/J9cXr>`__ to trigger the memory stress. Gets number of GBs as user input.
 
     >>> MemoryStress
 

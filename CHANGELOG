@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+0.2.8 (01/10/2022)
+------------------
+- Update broken links in docstrings
+- Match version as per the number of commits
+
 0.2.7 (01/10/2022)
 ------------------
 - Upgrade packages in requirements.txt

@@ -8,7 +8,7 @@ from psutil import cpu_percent
 
 
 class CPUStress:
-    """`Controller <https://git.io/JW70u>`__ for CPU stress using multiprocessing. Gets duration as user input.
+    """`Controller <https://git.io/J9cXV>`__ for CPU stress using multiprocessing. Gets duration as user input.
 
     >>> CPUStress
 
