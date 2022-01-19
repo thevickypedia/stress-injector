@@ -16,36 +16,28 @@ class CPUStress:
     the-process-class>`__ to run the infinite loop on each process.
 
     Args:
-        seconds [Optional]:
-            - The number of seconds for which the logical cores have to be stressed.
-            - If no value is provided, there will be a prompt to enter an integer value.
-
-    See Also:
-        Suggests a duration (in seconds) that is 5 times the number of logical cores present.
+        seconds:
+            - The number of seconds for which the CPU has to be stressed. Defaults to five times the number of cores.
 
     Warnings:
-        - DO heed the optimal value suggested before entering the input duration.
         - CPU stress is induced in real time.
         - A relatively low performing machine may stall when stress is induced for a long duration.
 
     References:
-        >>> CPUStress.infinite()
+        >>> CPUStress._infinite()
             Triggers an infinite loop for the number of logical cores.
 
-        >>> CPUStress.measure_cpu()
+        >>> CPUStress._measure_cpu()
             Measures the impact on each logical core in a dedicated thread.
     """
 
-    def __init__(self, seconds: int = None):
-        self.cores = cpu_count()
-        if seconds:
-            self.seconds = seconds
-        else:
-            self.seconds = int(input(f'Enter the number of seconds to stress your CPU cores: '
-                                     f'(Optimal for you: {self.cores * 5} secs)\n'))
+    CORES = cpu_count()
+
+    def __init__(self, seconds: int = CORES * 5):
+        self.seconds = seconds
         self.start_time = None
 
-    def infinite(self) -> None:
+    def _infinite(self) -> None:
         """Infinite loop to stress each core on the CPU for the number of logical cores available.
 
         See Also:
@@ -53,26 +45,15 @@ class CPUStress:
         """
         while True:
             try:
-                for _ in range(self.cores):
+                for _ in range(self.CORES):
                     pass
             except KeyboardInterrupt:
                 return
 
-    def measure_cpu(self) -> None:
+    def _measure_cpu(self) -> None:
         r"""Uses ``cpu_percent()`` to get the current CPU utilization and print the utilization percentage on each core.
 
         Runs in a forever loop. Stops when the flag ``stop_thread`` is set to ``True``.
-
-        See Also:
-            - The `stdout` is set to write and flush as the % value changes.
-            - This is done using the recursive flag ``\r`` in ``sys.stdout.write`` module which is set to work as
-              expected only in an IDE.
-            - Sorry Terminal fans, but on the bright side, ``os.system('clear')`` can be added right after
-              ``sys.stdout.write(f'\r{output.strip()}')``
-            - Uses transpose matrix, so first list will have all usage % of core1 and so on.
-            - Gets the maximum of each list to convert matrix to list.
-            - Creates a list of index values and CPU usage in a set.
-            - Sorts by CPU usage within the set in the list.
         """
         # noinspection PyGlobalUndefined
         global stop_thread
@@ -99,10 +80,10 @@ class CPUStress:
             print('Stress Test was stopped before it began.')
 
         print('CPU Usage Report:')
-        [print(f'Core {processor + 1} - {self.format_number(usage)}%') for processor, usage in processors]
+        [print(f'Core {processor + 1} - {self._format_number(usage)}%') for processor, usage in processors]
 
     @classmethod
-    def format_number(cls, n) -> int:
+    def _format_number(cls, n: float) -> int:
         """Converts numbers with float value .0 to integers.
 
         Args:
@@ -118,18 +99,18 @@ class CPUStress:
         """Initiator for stress injector.
 
         Methods:
-            - infinite: To kick off stress injector.
-            - measure: To measure the usage in the background running in a dedicated thread.
+            infinite: To kick off stress injector.
+            measure: To measure the usage in the background running in a dedicated thread.
         """
         # noinspection PyGlobalUndefined
         global stop_thread
         try:
             stdout.write(f'\rStressing CPU cores for {self.seconds} seconds')
             processes = []
-            for n in range(self.cores):
-                processes.append(Process(target=self.infinite))
+            for n in range(self.CORES):
+                processes.append(Process(target=self._infinite))
             stop_thread = False
-            measure = Thread(target=self.measure_cpu)
+            measure = Thread(target=self._measure_cpu)
             measure.start()
             sleep(1)
             self.start_time = time()

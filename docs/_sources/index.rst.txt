@@ -17,14 +17,16 @@ StressInjector - CPU Stress
 
 .. automodule:: cpu
    :members:
-   :undoc-members:
+   :private-members:
+   :exclude-members: CORES
 
 StressInjector - Memory Stress
 ==============================
 
 .. automodule:: memory
    :members:
-   :exclude-members: bytes
+   :private-members:
+   :exclude-members: MAX_DEFAULT, bytes
 
 Indices and tables
 ==================

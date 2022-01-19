@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+0.3.0 (01/18/2022)
+------------------
+- Update README.md on CPU stress usage
+- Remove prompt and use default values instead
+- Make some methods to be private
+
 0.2.9 (01/10/2022)
 ------------------
 - Update name of the repo

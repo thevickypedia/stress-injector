@@ -15,9 +15,9 @@
 # Stress Injector
 Python module, to inject memory and CPU stress
 
-## Insights
+<details>
+<summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/cpu.py">CPU Stress</a></strong></summary>
 
-**CPU Stress**
 * To achieve CPU stress, I have used multiprocess, looped for the number of logical cores, triggering an infinite loop on
   each core.
 * The infinite loop will run for a given number of seconds provided by user.
@@ -25,12 +25,16 @@ Python module, to inject memory and CPU stress
   utilization on each CPU core.
 * The dedicated thread runs for 3 seconds in addition to the number of seconds provided by the user.
 * Once the given number of seconds have passed, the `multiprocess` and `thread` that was initiated to monitor CPU usage are stopped.
+</details>
+<br>
+<details>
+<summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py">Memory Stress</a></strong></summary>
 
-**Memory Stress**
 * In this script, I have used `numpy.random.bytes` which are sampled from uniform distribution.
 * Generating these random bytes induces a stress on the machine's memory usage.
 * I have then used `getrusage` (get resource usage) for `SELF` to get the memory consumed only by the current script.
 * The `size_converter` converts the bytes from resource usage to a human understandable format.
+</details>
 
 ### Usage
 `pip install stress-injector`
@@ -39,18 +43,30 @@ Python module, to inject memory and CPU stress
 ```python
 from stressinjector.cpu import CPUStress
 
-CPUStress().run()  # will trigger a prompt asking for the number of seconds to be stressed.
+
+# Runs stress on logical cores for 60 seconds on the host machine.
+if __name__ == '__main__':
+    CPUStress(seconds=60).run()
+
 # OR
-CPUStress(seconds=60).run()  # will run stress on all available logical cores for 60 seconds without a prompt.
+
+# Defaults to 5 times the number of logical cores in the host machine.
+if __name__ == '__main__':
+    CPUStress().run()
 ```
+> For an explanation of why the `if __name__ == '__main__'` part is necessary, see [Programming guidelines](https://docs.python.org/3/library/multiprocessing.html#multiprocessing-programming).
 
 [Memory Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py)
 ```python
 from stressinjector.memory import MemoryStress
 
-MemoryStress().run()  # will trigger a prompt asking for the number of gigabytes to be stressed.
+
+# Defaults to twice the number of GBs in the host machine.
+MemoryStress().run()
 # OR
-MemoryStress(gigabytes=10).run()  # will run stress on the memory unit with 10 GigaBytes without a prompt.
+
+# Runs stress on the memory unit with 10 GigaBytes.
+MemoryStress(gigabytes=10).run()
 ```
 
 ### Coding Standards:
@@ -85,7 +101,3 @@ Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/
 &copy; Vignesh Sivanandha Rao
 
 Licensed under the [MIT License](https://github.com/thevickypedia/stress-injector/blob/main/LICENSE)
-
-[comment]: <> (brew install gh)
-[comment]: <> (gh auth login)
-[comment]: <> (`gh release create 0.0.7 --notes-file CHANGELOG --title 'Automate releases'`)
