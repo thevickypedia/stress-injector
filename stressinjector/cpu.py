@@ -67,7 +67,8 @@ class CPUStress:
             stdout.write(f'\r{output.strip()}')
             if stop_thread:
                 break
-        stdout.write('\r')  # flushes the screen output
+        stdout.flush()
+        stdout.write('\r')
         processors = map(list, zip(*processors))
         processors = [max(processor) for processor in processors]
         processors = list(enumerate(processors))

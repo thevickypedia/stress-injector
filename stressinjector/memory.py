@@ -113,10 +113,14 @@ class MemoryStress:
         try:
             stdout.write(f'\rStressing Memory with {self.gigabytes} GB')
             sleep(1)
+            stdout.flush()
+            stdout.write('\r')
             stdout.write(self._stress(mb=megabytes) + '\n')
         except KeyboardInterrupt:
             stdout.write('\rManual interrupt received. Stopping stress.\n')
             sleep(1)
+            stdout.flush()
+            stdout.write('\r')
         print(f'Actual memory Consumed: {_size_converter(self._memory_util_check())}')
 
 
