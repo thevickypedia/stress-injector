@@ -1,8 +1,8 @@
+import os
+import sys
+import time
 from multiprocessing import Process
-from os import cpu_count
-from sys import stdout
 from threading import Thread
-from time import sleep, time
 
 from psutil import cpu_percent
 
@@ -31,7 +31,7 @@ class CPUStress:
             Measures the impact on each logical core in a dedicated thread.
     """
 
-    CORES = cpu_count()
+    CORES = os.cpu_count()
 
     def __init__(self, seconds: int = CORES * 5):
         self.seconds = seconds
@@ -64,17 +64,17 @@ class CPUStress:
             output = ''
             for index, percent in enumerate(cpu_util):
                 output += f'Core {index + 1}: {percent}%\t'
-            stdout.write(f'\r{output.strip()}')
+            sys.stdout.write(f'\r{output.strip()}')
             if stop_thread:
                 break
-        stdout.flush()
-        stdout.write('\r')
+        sys.stdout.flush()
+        sys.stdout.write('\r')
         processors = map(list, zip(*processors))
         processors = [max(processor) for processor in processors]
         processors = list(enumerate(processors))
         processors = sorted(processors, key=lambda x: x[1], reverse=True)
 
-        if self.start_time and (run_time := round(time() - self.start_time)):
+        if self.start_time and (run_time := round(time.time() - self.start_time)):
             if (stop_when := self.seconds - run_time) and stop_when > 0:
                 print(f'Actual runtime: {run_time} seconds. Stopped {stop_when} seconds early.')
         else:
@@ -106,24 +106,24 @@ class CPUStress:
         # noinspection PyGlobalUndefined
         global stop_thread
         try:
-            stdout.write(f'\rStressing CPU cores for {self.seconds} seconds')
+            sys.stdout.write(f'\rStressing CPU cores for {self.seconds} seconds')
             processes = []
             for n in range(self.CORES):
                 processes.append(Process(target=self._infinite))
             stop_thread = False
             measure = Thread(target=self._measure_cpu)
             measure.start()
-            sleep(1)
-            self.start_time = time()
+            time.sleep(1)
+            self.start_time = time.time()
             [each_core.start() for each_core in processes]
-            sleep(self.seconds)
+            time.sleep(self.seconds)
             [each_core.terminate() for each_core in processes]
             [each_core.join() for each_core in processes]
-            sleep(1)
+            time.sleep(1)
             stop_thread = True
             measure.join()
         except KeyboardInterrupt:
-            stdout.write('\rManual interrupt received. Stopping stress.')
+            sys.stdout.write('\rManual interrupt received. Stopping stress.')
             stop_thread = True
 
 

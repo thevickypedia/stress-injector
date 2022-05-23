@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+0.3.2 (05/23/2022)
+------------------
+- Fix imports
+- Update docs
+
 0.3.1 (01/19/2022)
 ------------------
 - Flush screen output before carriage return

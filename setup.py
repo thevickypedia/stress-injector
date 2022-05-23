@@ -1,4 +1,4 @@
-from os.path import dirname, isfile, join, realpath, sep
+import os
 
 from setuptools import setup
 
@@ -14,7 +14,7 @@ classifiers = [
 ]
 
 
-def read(name):
+def read(name: str):
     """Reads the file that was received as argument.
 
     Args:
@@ -27,7 +27,7 @@ def read(name):
         https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py
 
     """
-    with open(join(dirname(__file__), name)) as file:
+    with open(os.path.join(os.path.dirname(__file__), name)) as file:
         content = file.read()
     return content
 
@@ -38,8 +38,9 @@ def dependencies() -> list:
     Returns:
         List of dependencies to be installed.
     """
-    requirement_file = dirname(realpath(__file__)) + f'{sep}stressinjector{sep}requirements.txt'
-    if isfile(requirement_file):
+    requirement_file = os.path.dirname(os.path.realpath(__file__)) + \
+        f'{os.path.sep}stressinjector{os.path.sep}requirements.txt'
+    if os.path.isfile(requirement_file):
         with open(requirement_file) as requirements:
             install_requires = requirements.read().splitlines()
     return install_requires
@@ -49,7 +50,7 @@ setup(
     name='stress-injector',
     version='.'.join(str(c) for c in version_info),
     description='Python module, to inject memory and CPU stress.',
-    long_description=read('README.md') + '\n\n' + read('CHANGELOG'),
+    long_description=read(name='README.md') + '\n\n' + read(name='CHANGELOG'),
     url='https://github.com/thevickypedia/stress-injector',
     author='Vignesh Sivanandha Rao',
     author_email='svignesh1793@gmail.com',

@@ -62,7 +62,7 @@
 <span id="stressinjector-cpu-stress"></span><h1>StressInjector - CPU Stress<a class="headerlink" href="#module-cpu" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cpu.CPUStress">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">CPUStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpu.CPUStress" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cpu.</span></span><span class="sig-name descname"><span class="pre">CPUStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cpu.CPUStress" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://git.io/J9cXV">Controller</a> for CPU stress using multiprocessing. Gets duration as user input.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CPUStress</span>
 </pre></div>
@@ -151,7 +151,7 @@
 <span id="stressinjector-memory-stress"></span><h1>StressInjector - Memory Stress<a class="headerlink" href="#module-memory" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="memory.MemoryStress">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">MemoryStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gigabytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">memory.</span></span><span class="sig-name descname"><span class="pre">MemoryStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gigabytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memory.MemoryStress" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://git.io/J9cXr">Controller</a> to trigger the memory stress. Gets number of GBs as user input.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MemoryStress</span>
 </pre></div>
@@ -202,7 +202,7 @@
 </dl>
 <p class="rubric">References</p>
 <dl>
-<dt><strong>MacOS:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">getrusage</span><span class="p">(</span><span class="n">RUSAGE_SELF</span><span class="p">)</span><span class="o">.</span><span class="n">ru_maxrss</span>
+<dt><strong>MacOS:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">resource</span><span class="o">.</span><span class="n">getrusage</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RUSAGE_SELF</span><span class="p">)</span><span class="o">.</span><span class="n">ru_maxrss</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://docs.python.org/3/library/resource.html#resource.getrusage">getrusage</a></p>
@@ -341,7 +341,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Vignesh Sivanandha Rao.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>
