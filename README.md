@@ -39,13 +39,14 @@ Python module, to inject memory and CPU stress
 <details>
 <summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/onus.py">URL Stress</a></strong></summary>
 
-* In this script, I have used threadpools to make concurrent GET requests.
-* The script uses builtin library `urllib` to make the GET calls.
+* In this script, I have used threadpools to make concurrent requests.
+* The script uses `requests` module to make calls.
 * Takes arguments
   * **rate**: Number of calls to make. _Defaults to 100K_
   * **timeout**: Timeout for each request. _Defaults to 0.5_
   * **retry_limit**: Retry limit if the system is unable to spinup more threads. _Defaults to 5_
   * **circuit_break**: Wait time in seconds between retries. _Defaults to 5_
+  * **request_type**: Function from `requests` module.
 
 </details>
 
@@ -59,8 +60,32 @@ import stressinjector as injector
 
 if __name__ == '__main__':
     injector.CPUStress(seconds=300).run()
+```
+
+[Memory Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py)
+```python
+import stressinjector as injector
+
+
+if __name__ == '__main__':
     injector.MemoryStress(gigabytes=2_000).run()
-    injector.URLStress(url='http://0.0.0.0:5002/').run()
+```
+
+[URL Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/url.py)
+```python
+import stressinjector as injector
+
+
+if __name__ == '__main__':
+    injector.URLStress(url='http://0.0.0.0:5002/').run()  # Stress test GET calls
+
+    # Stress test POST calls, also supports PUT, and DELETE
+    sample_data = {'data': {'username': 'test', 'password': 'test'}}
+    injector.URLStress(
+      url='http://0.0.0.0:5002/',
+      request_type=injector.RequestType.POST,
+      **sample_data
+    ).run()
 ```
 
 #### Coding Standards

@@ -1,14 +1,11 @@
-import http.client
 import logging
 import time
-import urllib.error
 import urllib.parse
-import urllib.request
 import warnings
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import NoReturn, Union
+from typing import Callable, NoReturn, Union
 
-from .models import LOGGER
+from .models import LOGGER, RequestType
 
 RESULT = {'success': 0, 'errors': 0}
 
@@ -22,7 +19,8 @@ class URLStress:
 
     def __init__(self, url: str, rate: int = 1e+5, timeout: Union[int, float] = 5e-1,
                  retry_limit: Union[int, float] = 5, circuit_break: Union[int, float] = 5,
-                 logger: logging.Logger = None, **kwargs):
+                 logger: logging.Logger = None, request_type: Callable = RequestType.GET,
+                 **kwargs):
         """Instantiate the object, parse and validate the URL.
 
         Args:
@@ -31,6 +29,8 @@ class URLStress:
             timeout: Timeout for each request.
             retry_limit: Retry limit if the system is unable to spinup more threads.
             circuit_break: Wait time in seconds between retries.
+            logger: Custom logger.
+            request_type: Function from ``requests`` module.
             kwargs: Keyword arguments to use in the request.
         """
         self.parsed = urllib.parse.urlparse(url=url, allow_fragments=True)
@@ -45,6 +45,7 @@ class URLStress:
         self.retry_limit = retry_limit
         self.circuit_break = circuit_break
         self.kwargs = kwargs or {}
+        self.request_type = request_type
 
     def make_request(self, sample: bool = False) -> NoReturn:
         """Makes a GET request to the endpoint.
@@ -53,16 +54,13 @@ class URLStress:
             sample: Boolean flag to indicate if the request is sample.
         """
         if sample:
-            response: http.client.HTTPResponse = urllib.request.urlopen(url=self.request_url, timeout=self.timeout,
-                                                                        **self.kwargs)
+            response = self.request_type(url=self.request_url, **self.kwargs)
         else:
-            response: http.client.HTTPResponse = urllib.request.urlopen(url=self.request_url, **self.kwargs)
-        response_code = response.getcode()
-        if 200 <= response_code <= 399:
+            response = self.request_type(url=self.request_url, timeout=self.timeout, **self.kwargs)
+        if response.ok:
             return
         else:
-            raise urllib.error.HTTPError(code=response_code, url=response.geturl(),
-                                         msg=response.msg.__str__(), hdrs=response.headers, fp=response.fp)
+            response.raise_for_status()
 
     def initiate_injection(self) -> NoReturn:
         """Initiates injection in a thread pool."""

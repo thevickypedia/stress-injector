@@ -2,6 +2,9 @@ import logging
 import os
 import platform
 from enum import Enum
+from typing import Callable
+
+import requests
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(logging.StreamHandler())
@@ -31,6 +34,15 @@ class Settings:
 
 
 settings = Settings
+
+
+class RequestType:
+    """Wrapper for request types."""
+
+    GET: Callable = requests.get
+    PUT: Callable = requests.put
+    POST: Callable = requests.post
+    DELETE: Callable = requests.delete
 
 
 _supported_systems = (operating_system.macOS, operating_system.linux, operating_system.windows)

@@ -78,14 +78,15 @@ utilization on each CPU core.</p></li>
 <br>
 <details>
 <summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/onus.py">URL Stress</a></strong></summary><ul class="simple">
-<li><p>In this script, I have used threadpools to make concurrent GET requests.</p></li>
-<li><p>The script uses builtin library <code class="docutils literal notranslate"><span class="pre">urllib</span></code> to make the GET calls.</p></li>
+<li><p>In this script, I have used threadpools to make concurrent requests.</p></li>
+<li><p>The script uses <code class="docutils literal notranslate"><span class="pre">requests</span></code> module to make calls.</p></li>
 <li><p>Takes arguments</p>
 <ul>
 <li><p><strong>rate</strong>: Number of calls to make. <em>Defaults to 100K</em></p></li>
 <li><p><strong>timeout</strong>: Timeout for each request. <em>Defaults to 0.5</em></p></li>
 <li><p><strong>retry_limit</strong>: Retry limit if the system is unable to spinup more threads. <em>Defaults to 5</em></p></li>
 <li><p><strong>circuit_break</strong>: Wait time in seconds between retries. <em>Defaults to 5</em></p></li>
+<li><p><strong>request_type</strong>: Function from <code class="docutils literal notranslate"><span class="pre">requests</span></code> module.</p></li>
 </ul>
 </li>
 </ul>
@@ -98,8 +99,30 @@ utilization on each CPU core.</p></li>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">injector</span><span class="o">.</span><span class="n">CPUStress</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py">Memory Stress</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stressinjector</span> <span class="k">as</span> <span class="nn">injector</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">injector</span><span class="o">.</span><span class="n">MemoryStress</span><span class="p">(</span><span class="n">gigabytes</span><span class="o">=</span><span class="mi">2_000</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-    <span class="n">injector</span><span class="o">.</span><span class="n">URLStress</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:5002/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/url.py">URL Stress</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stressinjector</span> <span class="k">as</span> <span class="nn">injector</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">injector</span><span class="o">.</span><span class="n">URLStress</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:5002/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># Stress test GET calls</span>
+
+    <span class="c1"># Stress test POST calls, also supports PUT, and DELETE</span>
+    <span class="n">sample_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">}}</span>
+    <span class="n">injector</span><span class="o">.</span><span class="n">URLStress</span><span class="p">(</span>
+      <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:5002/&#39;</span><span class="p">,</span>
+      <span class="n">request_type</span><span class="o">=</span><span class="n">injector</span><span class="o">.</span><span class="n">RequestType</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span>
+      <span class="o">**</span><span class="n">sample_data</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 <section id="coding-standards">

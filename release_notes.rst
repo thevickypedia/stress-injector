@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+0.3.4 (04/13/2023)
+------------------
+- Use `requests` module to support all `http` methods
+- Release a stable version 0.4
+
 0.3.3 (04/13/2023)
 ------------------
 - Reconstruct `stress-injector` to support Linux
