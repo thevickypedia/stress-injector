@@ -1,6 +1,4 @@
 import math
-import os
-import platform
 import resource
 import sys
 import time
@@ -9,6 +7,9 @@ from typing import Union
 import psutil
 from numpy.random import bytes
 from tqdm import tqdm
+
+from .echo import echo
+from .models import operating_system, settings
 
 
 def _size_converter(byte_size: Union[int, float]) -> str:
@@ -72,35 +73,36 @@ class MemoryStress:
             Calls the ``size_converter`` method to get the human-readable size of stress that was induced.
         """
         mb2bytes = 1024 * 1024
-        result = [bytes(mb2bytes) for _ in tqdm(range(mb), desc='Generating random bytes', unit=' bytes',
-                                                leave=False)]
+        result = [bytes(mb2bytes) for _ in tqdm(range(mb), desc='Generating random bytes', unit=' bytes', leave=False)]
         return f'Stress Injected: {_size_converter(len(result) * mb2bytes)}'
 
     @classmethod
-    def _memory_util_check(cls) -> int:
+    def _memory_util_check(cls) -> Union[int, float]:
         """Returns memory used only the current script.
 
         Returns:
-            int:
+            int or float:
             The memory used by the current process.
 
         References:
-            **MacOS:**
+            **macOS or Linux:**
+                - https://man7.org/linux/man-pages/man2/getrusage.2.html#:~:text=RUSAGE_CHILDREN
+
                 >>> resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
                 `getrusage <https://docs.python.org/3/library/resource.html#resource.getrusage>`__
 
             **Windows:**
-                >>> process.memory_info().peak_wset
+                >>> psutil.Process(settings.pid).memory_info().peak_wset
 
                 `memory_info <https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_info>`__
         """
-        operating_system = platform.system()
-        if operating_system == 'Darwin':
+        if settings.os == operating_system.macOS:
             return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        elif operating_system == 'Windows':
-            process = psutil.Process(os.getpid())
-            return process.memory_info().peak_wset
+        if settings.os == operating_system.linux:
+            return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1e+3
+        if settings.os == operating_system.windows:
+            return psutil.Process(settings.pid).memory_info().peak_wset
 
     def run(self) -> None:
         """Initiator for stress injector. Converts GigaBytes to Bytes.
@@ -121,8 +123,4 @@ class MemoryStress:
             time.sleep(1)
             sys.stdout.flush()
             sys.stdout.write('\r')
-        print(f'Actual memory Consumed: {_size_converter(self._memory_util_check())}')
-
-
-if __name__ == '__main__':
-    MemoryStress(gigabytes=1).run()
+        echo.info(f'Actual memory Consumed: {_size_converter(self._memory_util_check())}')

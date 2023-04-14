@@ -3,8 +3,11 @@ import sys
 import time
 from multiprocessing import Process
 from threading import Thread
+from typing import List
 
-from psutil import cpu_percent
+import psutil
+
+from .echo import echo
 
 
 class CPUStress:
@@ -59,7 +62,7 @@ class CPUStress:
         global stop_thread
         processors = []
         while True:
-            cpu_util = cpu_percent(interval=1, percpu=True)
+            cpu_util: List[float] = psutil.cpu_percent(interval=1, percpu=True)  # noqa
             processors.append(cpu_util)  # stores the list of usage % as a list within a list
             output = ''
             for index, percent in enumerate(cpu_util):
@@ -76,11 +79,11 @@ class CPUStress:
 
         if self.start_time and (run_time := round(time.time() - self.start_time)):
             if (stop_when := self.seconds - run_time) and stop_when > 0:
-                print(f'Actual runtime: {run_time} seconds. Stopped {stop_when} seconds early.')
+                echo.warning(f'Actual runtime: {run_time} seconds. Stopped {stop_when} seconds early.')
         else:
-            print('Stress Test was stopped before it began.')
+            echo.warning('Stress Test was stopped before it began.')
 
-        print('CPU Usage Report:')
+        echo.info('CPU Usage Report:')
         [print(f'Core {processor + 1} - {self._format_number(usage)}%') for processor, usage in processors]
 
     @classmethod
@@ -125,7 +128,3 @@ class CPUStress:
         except KeyboardInterrupt:
             sys.stdout.write('\rManual interrupt received. Stopping stress.')
             stop_thread = True
-
-
-if __name__ == '__main__':
-    CPUStress(seconds=60).run()

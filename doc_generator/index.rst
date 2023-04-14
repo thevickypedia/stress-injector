@@ -15,7 +15,7 @@ Welcome to Stress Injector's documentation!
 StressInjector - CPU Stress
 ==============================
 
-.. automodule:: cpu
+.. automodule:: stressinjector.cpu
    :members:
    :private-members:
    :exclude-members: CORES
@@ -23,10 +23,17 @@ StressInjector - CPU Stress
 StressInjector - Memory Stress
 ==============================
 
-.. automodule:: memory
+.. automodule:: stressinjector.memory
    :members:
    :private-members:
    :exclude-members: MAX_DEFAULT, bytes
+
+StressInjector - URL Stress
+===========================
+
+.. automodule:: stressinjector.url
+   :members:
+   :private-members:
 
 Indices and tables
 ==================

@@ -1,5 +1,12 @@
-Change Log
-==========
+Release Notes
+=============
+
+0.3.3 (04/13/2023)
+------------------
+- Reconstruct `stress-injector` to support Linux
+- Add URL stress testing using threadpool
+- Use pyproject.toml to upload package to pypi
+- Create a new module for custom print statements
 
 0.3.2 (05/23/2022)
 ------------------

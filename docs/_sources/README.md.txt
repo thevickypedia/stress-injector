@@ -7,7 +7,7 @@
 [![Pypi-format](https://img.shields.io/pypi/format/stress-injector)](https://pypi.org/project/stress-injector/#files)
 [![Pypi-status](https://img.shields.io/pypi/status/stress-injector)](https://pypi.org/project/stress-injector)
 
-![Maintained](https://img.shields.io/maintenance/yes/2022)
+![Maintained](https://img.shields.io/maintenance/yes/2023)
 [![GitHub Repo created](https://img.shields.io/date/1599432310)](https://api.github.com/repos/thevickypedia/stress-injector)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/stress-injector)](https://api.github.com/repos/thevickypedia/stress-injector)
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress-injector)](https://api.github.com/repos/thevickypedia/stress-injector)
@@ -35,56 +35,65 @@ Python module, to inject memory and CPU stress
 * I have then used `getrusage` (get resource usage) for `SELF` to get the memory consumed only by the current script.
 * The `size_converter` converts the bytes from resource usage to a human understandable format.
 </details>
+<br>
+<details>
+<summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/onus.py">URL Stress</a></strong></summary>
+
+* In this script, I have used threadpools to make concurrent GET requests.
+* The script uses builtin library `urllib` to make the GET calls.
+* Takes arguments
+  * **rate**: Number of calls to make. _Defaults to 100K_
+  * **timeout**: Timeout for each request. _Defaults to 0.5_
+  * **retry_limit**: Retry limit if the system is unable to spinup more threads. _Defaults to 5_
+  * **circuit_break**: Wait time in seconds between retries. _Defaults to 5_
+
+</details>
 
 ### Usage
 `pip install stress-injector`
 
 [CPU Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/cpu.py)
 ```python
-from stressinjector.cpu import CPUStress
+import stressinjector as injector
 
 
-# Runs stress on logical cores for 60 seconds on the host machine.
 if __name__ == '__main__':
-    CPUStress(seconds=60).run()
-
-# OR
-
-# Defaults to 5 times the number of logical cores in the host machine.
-if __name__ == '__main__':
-    CPUStress().run()
-```
-> For an explanation of why the `if __name__ == '__main__'` part is necessary, see [Programming guidelines](https://docs.python.org/3/library/multiprocessing.html#multiprocessing-programming).
-
-[Memory Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py)
-```python
-from stressinjector.memory import MemoryStress
-
-
-# Defaults to twice the number of GBs in the host machine.
-MemoryStress().run()
-# OR
-
-# Runs stress on the memory unit with 10 GigaBytes.
-MemoryStress(gigabytes=10).run()
+    injector.CPUStress(seconds=300).run()
+    injector.MemoryStress(gigabytes=2_000).run()
+    injector.URLStress(url='http://0.0.0.0:5002/').run()
 ```
 
-### Coding Standards:
+#### Coding Standards
 Docstring format: [`Google`](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) <br>
 Styling conventions: [`PEP 8`](https://www.python.org/dev/peps/pep-0008/) <br>
 Clean code with pre-commit hooks: [`flake8`](https://flake8.pycqa.org/en/latest/) and 
 [`isort`](https://pycqa.github.io/isort/)
 
-### Linting
+#### [Release Notes](https://github.com/thevickypedia/stress-injector/blob/main/release_notes.rst)
+**Requirement**
+```shell
+python -m pip install changelog-generator
+```
+
+**Usage**
+```shell
+changelog reverse -f release_notes.rst -t 'Release Notes'
+```
+
+#### Linting
 `PreCommit` will ensure linting, and the doc creation are run on every commit.
 
 **Requirement**
 <br>
-`pip install --no-cache --upgrade sphinx pre-commit recommonmark`
+```bash
+pip install --no-cache sphinx==5.1.1 pre-commit recommonmark
+```
 
 **Usage**
 <br>
-`pre-commit run --all-files`
+```bash
+pre-commit run --all-files
+```
 
 ### Pypi Package
 [![pypi-module](https://img.shields.io/badge/Software%20Repository-pypi-1f425f.svg)](https://packaging.python.org/tutorials/packaging-projects/)

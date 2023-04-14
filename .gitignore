@@ -2,3 +2,7 @@
 venv
 __pycache__
 _build
+package.*
+dist
+*.egg-info
+temp_*
