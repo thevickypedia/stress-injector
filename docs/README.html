@@ -98,7 +98,7 @@ utilization on each CPU core.</p></li>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">injector</span><span class="o">.</span><span class="n">CPUStress</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">injector</span><span class="o">.</span><span class="n">CPUStress</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py">Memory Stress</a></p>
@@ -110,19 +110,20 @@ utilization on each CPU core.</p></li>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/url.py">URL Stress</a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stressinjector</span> <span class="k">as</span> <span class="nn">injector</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">stressinjector</span> <span class="k">as</span> <span class="nn">injector</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">injector</span><span class="o">.</span><span class="n">URLStress</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:5002/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># Stress test GET calls</span>
+    <span class="n">injector</span><span class="o">.</span><span class="n">URLStress</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:5002/&#39;</span><span class="p">)</span>  <span class="c1"># Stress test GET calls</span>
 
     <span class="c1"># Stress test POST calls, also supports PUT, and DELETE</span>
-    <span class="n">sample_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;test&#39;</span><span class="p">}}</span>
+    <span class="n">sample_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s1">&#39;Bearer </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;TOKEN&#39;</span><span class="p">)}}</span>
     <span class="n">injector</span><span class="o">.</span><span class="n">URLStress</span><span class="p">(</span>
       <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:5002/&#39;</span><span class="p">,</span>
-      <span class="n">request_type</span><span class="o">=</span><span class="n">injector</span><span class="o">.</span><span class="n">RequestType</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span>
+      <span class="n">request_type</span><span class="o">=</span><span class="n">injector</span><span class="o">.</span><span class="n">RequestType</span><span class="o">.</span><span class="n">post</span><span class="p">,</span>
       <span class="o">**</span><span class="n">sample_data</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 <section id="coding-standards">

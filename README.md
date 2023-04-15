@@ -59,7 +59,7 @@ import stressinjector as injector
 
 
 if __name__ == '__main__':
-    injector.CPUStress(seconds=300).run()
+    injector.CPUStress(seconds=300)
 ```
 
 [Memory Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py)
@@ -73,19 +73,20 @@ if __name__ == '__main__':
 
 [URL Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/url.py)
 ```python
+import os
 import stressinjector as injector
 
 
 if __name__ == '__main__':
-    injector.URLStress(url='http://0.0.0.0:5002/').run()  # Stress test GET calls
+    injector.URLStress(url='http://0.0.0.0:5002/')  # Stress test GET calls
 
     # Stress test POST calls, also supports PUT, and DELETE
-    sample_data = {'data': {'username': 'test', 'password': 'test'}}
+    sample_data = {'headers': {'Authorization': 'Bearer %s' % os.environ.get('TOKEN')}}
     injector.URLStress(
       url='http://0.0.0.0:5002/',
-      request_type=injector.RequestType.POST,
+      request_type=injector.RequestType.post,
       **sample_data
-    ).run()
+    )
 ```
 
 #### Coding Standards

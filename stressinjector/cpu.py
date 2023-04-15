@@ -39,6 +39,7 @@ class CPUStress:
     def __init__(self, seconds: int = CORES * 5):
         self.seconds = seconds
         self.start_time = None
+        self._run()
 
     def _infinite(self) -> None:
         """Infinite loop to stress each core on the CPU for the number of logical cores available.
@@ -99,7 +100,7 @@ class CPUStress:
         """
         return int(n) if isinstance(n, float) and n.is_integer() else n
 
-    def run(self) -> None:
+    def _run(self) -> None:
         """Initiator for stress injector.
 
         Methods:

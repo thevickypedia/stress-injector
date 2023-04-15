@@ -1,6 +1,13 @@
 Release Notes
 =============
 
+0.3.5 (04/15/2023)
+------------------
+- Remove retry logic and add more logs
+- Run assert on condition basis
+- Improve logging and log format
+- Remove function call to trigger
+
 0.3.4 (04/13/2023)
 ------------------
 - Use `requests` module to support all `http` methods

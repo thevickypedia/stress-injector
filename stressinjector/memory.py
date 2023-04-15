@@ -58,6 +58,7 @@ class MemoryStress:
 
     def __init__(self, gigabytes: int = MAX_DEFAULT):
         self.gigabytes = gigabytes
+        self._run()
 
     @classmethod
     def _stress(cls, mb: int) -> str:
@@ -104,7 +105,7 @@ class MemoryStress:
         if settings.os == operating_system.windows:
             return psutil.Process(settings.pid).memory_info().peak_wset
 
-    def run(self) -> None:
+    def _run(self) -> None:
         """Initiator for stress injector. Converts GigaBytes to Bytes.
 
         Methods:

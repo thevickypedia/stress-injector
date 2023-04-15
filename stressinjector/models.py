@@ -2,13 +2,14 @@ import logging
 import os
 import platform
 from enum import Enum
-from typing import Callable
-
-import requests
 
 LOGGER = logging.getLogger(__name__)
-LOGGER.addHandler(logging.StreamHandler())
-LOGGER.setLevel(logging.DEBUG)
+DEFAULT_LOG_FORM = '%(asctime)s - %(levelname)s - [%(processName)s:%(module)s:%(lineno)d] - %(funcName)s - %(message)s'
+DEFAULT_FORMATTER = logging.Formatter(datefmt='%b-%d-%Y %I:%M:%S %p', fmt=DEFAULT_LOG_FORM)
+HANDLER = logging.StreamHandler()
+HANDLER.setFormatter(fmt=DEFAULT_FORMATTER)
+LOGGER.addHandler(hdlr=HANDLER)
+LOGGER.setLevel(level=logging.DEBUG)
 
 
 class UnsupportedOS(OSError):
@@ -36,13 +37,13 @@ class Settings:
 settings = Settings
 
 
-class RequestType:
+class RequestType(str, Enum):
     """Wrapper for request types."""
 
-    GET: Callable = requests.get
-    PUT: Callable = requests.put
-    POST: Callable = requests.post
-    DELETE: Callable = requests.delete
+    get: str = "get"
+    put: str = "put"
+    post: str = "post"
+    delete: str = "delete"
 
 
 _supported_systems = (operating_system.macOS, operating_system.linux, operating_system.windows)

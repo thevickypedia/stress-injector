@@ -126,8 +126,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.cpu.CPUStress.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#stressinjector.cpu.CPUStress.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="stressinjector.cpu.CPUStress._run">
+<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#stressinjector.cpu.CPUStress._run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiator for stress injector.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="stressinjector.cpu.CPUStress.infinite">
@@ -218,6 +218,24 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="stressinjector.memory.MemoryStress._run">
+<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#stressinjector.memory.MemoryStress._run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiator for stress injector. Converts GigaBytes to Bytes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="stressinjector.memory.MemoryStress.stress">
+<span class="sig-name descname"><span class="pre">stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.memory.MemoryStress.stress" title="Permalink to this definition">¶</a></dt>
+<dd><p>To kick off stress injector with the desired bytes converted from user input.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="stressinjector.memory.MemoryStress.memory_util_check">
+<span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.memory.MemoryStress.memory_util_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>To measure the usage post completion.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="stressinjector.memory.MemoryStress._stress">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_stress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#stressinjector.memory.MemoryStress._stress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.bytes.html">random bytes</a>.</p>
@@ -233,24 +251,6 @@
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.memory.MemoryStress.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#stressinjector.memory.MemoryStress.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initiator for stress injector. Converts GigaBytes to Bytes.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.memory.MemoryStress.stress">
-<span class="sig-name descname"><span class="pre">stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.memory.MemoryStress.stress" title="Permalink to this definition">¶</a></dt>
-<dd><p>To kick off stress injector with the desired bytes converted from user input.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.memory.MemoryStress.memory_util_check">
-<span class="sig-name descname"><span class="pre">memory_util_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.memory.MemoryStress.memory_util_check" title="Permalink to this definition">¶</a></dt>
-<dd><p>To measure the usage post completion.</p>
-</dd></dl>
-
 </dd></dl>
 
 </dd></dl>
@@ -277,7 +277,7 @@
 <span id="stressinjector-url-stress"></span><h1>StressInjector - URL Stress<a class="headerlink" href="#module-stressinjector.url" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="stressinjector.url.URLStress">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stressinjector.url.</span></span><span class="sig-name descname"><span class="pre">URLStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout:</span> <span class="pre">~typing.Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span> <span class="pre">=</span> <span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_limit:</span> <span class="pre">~typing.Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circuit_break:</span> <span class="pre">~typing.Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float]</span> <span class="pre">=</span> <span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger:</span> <span class="pre">~typing.Optional[~logging.Logger]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request_type:</span> <span class="pre">~typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">get&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.url.URLStress" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stressinjector.url.</span></span><span class="sig-name descname"><span class="pre">URLStress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Logger</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">RequestType.get</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.url.URLStress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Controller for URL stress using threadpool. Gets url as input.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">URLStress</span>
 </pre></div>
@@ -298,9 +298,23 @@
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="stressinjector.url.URLStress._run">
+<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#stressinjector.url.URLStress._run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs initiate request injection and prints success and error count.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="stressinjector.url.URLStress.initiate_injection">
-<span class="sig-name descname"><span class="pre">initiate_injection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#stressinjector.url.URLStress.initiate_injection" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">initiate_injection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#stressinjector.url.URLStress.initiate_injection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiates injection in a thread pool.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a boolean flag based on successful completion.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -312,12 +326,6 @@
 <dd class="field-odd"><p><strong>sample</strong> – Boolean flag to indicate if the request is sample.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.url.URLStress.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#stressinjector.url.URLStress.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs initiate request injection and prints success and error count.</p>
 </dd></dl>
 
 </dd></dl>
@@ -349,94 +357,22 @@ last_value: the last value assigned or None</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="stressinjector.models.RequestType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stressinjector.models.</span></span><span class="sig-name descname"><span class="pre">RequestType</span></span><a class="headerlink" href="#stressinjector.models.RequestType" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">stressinjector.models.</span></span><span class="sig-name descname"><span class="pre">RequestType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.models.RequestType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper for request types.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.models.RequestType.DELETE">
-<span class="sig-name descname"><span class="pre">DELETE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.models.RequestType.DELETE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sends a DELETE request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> – URL for the new <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code> object.</p></li>
-<li><p><strong>**kwargs</strong> – Optional arguments that <code class="docutils literal notranslate"><span class="pre">request</span></code> takes.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>requests.Response</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="stressinjector.models.RequestType._generate_next_value_">
+<span class="sig-name descname"><span class="pre">_generate_next_value_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.models.RequestType._generate_next_value_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the next value when not given.</p>
+<p>name: the name of the member
+start: the initial start value or None
+count: the number of existing members
+last_value: the last value assigned or None</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.models.RequestType.GET">
-<span class="sig-name descname"><span class="pre">GET</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.models.RequestType.GET" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sends a GET request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> – URL for the new <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code> object.</p></li>
-<li><p><strong>params</strong> – (optional) Dictionary, list of tuples or bytes to send
-in the query string for the <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Optional arguments that <code class="docutils literal notranslate"><span class="pre">request</span></code> takes.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>requests.Response</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.models.RequestType.POST">
-<span class="sig-name descname"><span class="pre">POST</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.models.RequestType.POST" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sends a POST request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> – URL for the new <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code> object.</p></li>
-<li><p><strong>data</strong> – (optional) Dictionary, list of tuples, bytes, or file-like
-object to send in the body of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code>.</p></li>
-<li><p><strong>json</strong> – (optional) json data to send in the body of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Optional arguments that <code class="docutils literal notranslate"><span class="pre">request</span></code> takes.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>requests.Response</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="stressinjector.models.RequestType.PUT">
-<span class="sig-name descname"><span class="pre">PUT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stressinjector.models.RequestType.PUT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sends a PUT request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> – URL for the new <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code> object.</p></li>
-<li><p><strong>data</strong> – (optional) Dictionary, list of tuples, bytes, or file-like
-object to send in the body of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code>.</p></li>
-<li><p><strong>json</strong> – (optional) json data to send in the body of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code>.</p></li>
-<li><p><strong>**kwargs</strong> – Optional arguments that <code class="docutils literal notranslate"><span class="pre">request</span></code> takes.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>requests.Response</p>
-</dd>
-</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stressinjector.models.RequestType._member_type_">
+<span class="sig-name descname"><span class="pre">_member_type_</span></span><a class="headerlink" href="#stressinjector.models.RequestType._member_type_" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd></dl>
 
 </dd></dl>
