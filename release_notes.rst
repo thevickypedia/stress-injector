@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+0.3.7 (04/16/2023)
+------------------
+- Update sphinx docs
+
 0.3.6 (04/16/2023)
 ------------------
 - Remove echo and use logging to print

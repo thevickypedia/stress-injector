@@ -42,6 +42,13 @@ StressInjector - Models
    :members:
    :private-members:
 
+StressInjector - Helper
+=======================
+
+.. automodule:: stressinjector.helper
+   :members:
+   :private-members:
+
 Indices and tables
 ==================
 
