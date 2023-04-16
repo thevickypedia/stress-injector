@@ -10,9 +10,6 @@ import requests
 
 from .models import LOGGER, RequestType
 
-RESULT = {'success': 0, 'errors': 0}
-event = Event()
-
 
 class URLStress:
     """Controller for URL stress using threadpool. Gets url as input.
@@ -20,6 +17,9 @@ class URLStress:
     >>> URLStress
 
     """
+
+    RESULT = {'success': 0, 'errors': 0}
+    EVENT = Event()
 
     def __init__(self, url: str, rate: int = 1e+5, timeout: Union[int, float] = None,
                  logger: logging.Logger = None, request_type: str = RequestType.get,
@@ -60,7 +60,7 @@ class URLStress:
         Args:
             sample: Boolean flag to indicate if the request is sample.
         """
-        if event.is_set():
+        if self.EVENT.is_set():
             return
         if sample:
             response = requests.request(method=self.request_type.lower(), url=self.request_url, **self.kwargs)
@@ -90,9 +90,9 @@ class URLStress:
                     self.LOGGER.error(error)
                     self.LOGGER.warning("cancelling future tasks")
                     future.cancel()
-                    event.set()
+                    self.EVENT.set()
                     total = len(futures)
-                    returned = sum(RESULT.values())
+                    returned = sum(self.RESULT.values())
                     self.LOGGER.warning("calls made: %d", f'{total:,}')
                     self.LOGGER.warning("calls completed: %d", f'{returned:,}')
                     self.LOGGER.warning("calls pending: %d", f'{total - returned:,}')
@@ -102,9 +102,9 @@ class URLStress:
             if future.exception():
                 self.LOGGER.error("thread processing for '%s' received an exception: '%s'",
                                   iterator, future.exception())
-                RESULT['errors'] += 1
+                self.RESULT['errors'] += 1
             else:
-                RESULT['success'] += 1
+                self.RESULT['success'] += 1
         return True
 
     def _run(self) -> NoReturn:
@@ -122,9 +122,9 @@ class URLStress:
         start = time.time()
         run_assert = self.initiate_injection()
         self.LOGGER.info("Request injection completed in %f seconds", round(float(time.time() - start), 2))
-        self.LOGGER.info("Total number of requests passed: %d", RESULT['success'])
-        self.LOGGER.warning("Total number of requests failed: %d", RESULT['errors'])
+        self.LOGGER.info("Total number of requests passed: %d", self.RESULT['success'])
+        self.LOGGER.warning("Total number of requests failed: %d", self.RESULT['errors'])
         if run_assert:
-            assert sum(RESULT.values()) == self.request_rate, "Not all request trails were successful"
+            assert sum(self.RESULT.values()) == self.request_rate, "Not all request trails were successful"
         else:
-            self.LOGGER.warning("Total number of requests abandoned: %d", self.request_rate - sum(RESULT.values()))
+            self.LOGGER.warning("Total number of requests abandoned: %d", self.request_rate - sum(self.RESULT.values()))

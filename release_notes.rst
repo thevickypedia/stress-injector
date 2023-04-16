@@ -1,6 +1,13 @@
 Release Notes
 =============
 
+0.3.6 (04/16/2023)
+------------------
+- Remove echo and use logging to print
+- Move variables to object members in url
+- Update badges and startup instructions
+- Bump version
+
 0.3.5 (04/15/2023)
 ------------------
 - Remove retry logic and add more logs

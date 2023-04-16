@@ -1,8 +1,8 @@
 [![Pypi-version](https://img.shields.io/pypi/v/stress-injector)](https://pypi.org/project/stress-injector)
 [![Pypi-py-version](https://img.shields.io/pypi/pyversions/stress-injector)](https://pypi.org/project/stress-injector)
 
-![docs](https://github.com/thevickypedia/stress-injector/actions/workflows/docs.yml/badge.svg)
-![pypi](https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml/badge.svg)
+[![pages-build-deployment](https://github.com/thevickypedia/stress-injector/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/thevickypedia/stress-injector/actions/workflows/pages/pages-build-deployment)
+[![pypi-publish](https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml/badge.svg)](https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml)
 
 [![Pypi-format](https://img.shields.io/pypi/format/stress-injector)](https://pypi.org/project/stress-injector/#files)
 [![Pypi-status](https://img.shields.io/pypi/status/stress-injector)](https://pypi.org/project/stress-injector)
@@ -13,25 +13,25 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/stress-injector)](https://api.github.com/repos/thevickypedia/stress-injector)
 
 # Stress Injector
-Python module, to inject memory and CPU stress
+Python module, to inject memory, CPU and URL stress.
 
 <details>
 <summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/cpu.py">CPU Stress</a></strong></summary>
 
 * To achieve CPU stress, I have used multiprocess, looped for the number of logical cores, triggering an infinite loop on
   each core.
-* The infinite loop will run for a given number of seconds provided by user.
-* Mean-while the `cpu_percent` from `psutil` runs (dedicated thread) in an infinite loop calculating the current CPU 
+* The infinite loop will run for a given number of seconds (provided by the user)
+* Mean-while the `cpu_percent` from `psutil` runs (in a dedicated thread) in an infinite loop calculating the current CPU 
   utilization on each CPU core.
 * The dedicated thread runs for 3 seconds in addition to the number of seconds provided by the user.
-* Once the given number of seconds have passed, the `multiprocess` and `thread` that was initiated to monitor CPU usage are stopped.
+* Once the given number of seconds have passed, the `processes` and `threads` initiated to monitor CPU usage are stopped.
 </details>
 <br>
 <details>
 <summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py">Memory Stress</a></strong></summary>
 
 * In this script, I have used `numpy.random.bytes` which are sampled from uniform distribution.
-* Generating these random bytes induces a stress on the machine's memory usage.
+* These random bytes are collected from the machine's physical memory increasing the program's usage.
 * I have then used `getrusage` (get resource usage) for `SELF` to get the memory consumed only by the current script.
 * The `size_converter` converts the bytes from resource usage to a human understandable format.
 </details>
@@ -68,7 +68,7 @@ import stressinjector as injector
 
 
 if __name__ == '__main__':
-    injector.MemoryStress(gigabytes=2_000).run()
+    injector.MemoryStress(gigabytes=2_000)
 ```
 
 [URL Stress](https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/url.py)
@@ -88,6 +88,9 @@ if __name__ == '__main__':
       **sample_data
     )
 ```
+> This module can only induce stress on a given URL by making N number of calls. Suitable for APIs running on localhost.
+> 
+> To perform a real-time load test, refer [locust.io](https://locust.io/)
 
 #### Coding Standards
 Docstring format: [`Google`](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) <br>

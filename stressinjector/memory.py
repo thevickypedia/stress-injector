@@ -1,6 +1,6 @@
+import logging
 import math
 import resource
-import sys
 import time
 from typing import Union
 
@@ -8,8 +8,8 @@ import psutil
 from numpy.random import bytes
 from tqdm import tqdm
 
-from .echo import echo
-from .models import operating_system, settings
+from .helper import flush_screen
+from .models import LOGGER, operating_system, settings
 
 
 def _size_converter(byte_size: Union[int, float]) -> str:
@@ -56,7 +56,14 @@ class MemoryStress:
 
     MAX_DEFAULT = round(float(_size_converter(psutil.virtual_memory().total).split()[0]) * 2)
 
-    def __init__(self, gigabytes: int = MAX_DEFAULT):
+    def __init__(self, gigabytes: int = MAX_DEFAULT, logger: logging.Logger = None):
+        """Instantiates the members of the class.
+
+        Args:
+            gigabytes: The number of gigabytes, memory has to be stressed. Defaults to twice the physical memory.
+            logger: Custom logger.
+        """
+        self.LOGGER = logger or LOGGER
         self.gigabytes = gigabytes
         self._run()
 
@@ -114,14 +121,12 @@ class MemoryStress:
         """
         megabytes = int(self.gigabytes) * 1024  # gigabytes to megabytes
         try:
-            sys.stdout.write(f'\rStressing Memory with {self.gigabytes} GB')
+            self.LOGGER.info('Stressing Memory with %d GB', self.gigabytes)
             time.sleep(1)
-            sys.stdout.flush()
-            sys.stdout.write('\r')
-            sys.stdout.write(self._stress(mb=megabytes) + '\n')
+            flush_screen()
+            self.LOGGER.info(self._stress(mb=megabytes) + '\n')
         except KeyboardInterrupt:
-            sys.stdout.write('\rManual interrupt received. Stopping stress.\n')
+            self.LOGGER.warning('Manual interrupt received. Stopping stress.')
             time.sleep(1)
-            sys.stdout.flush()
-            sys.stdout.write('\r')
-        echo.info(f'Actual memory Consumed: {_size_converter(self._memory_util_check())}')
+            flush_screen()
+        self.LOGGER.info('Actual memory Consumed: %s', _size_converter(self._memory_util_check()))

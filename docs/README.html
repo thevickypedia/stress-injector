@@ -44,8 +44,8 @@
             
   <p><a class="reference external" href="https://pypi.org/project/stress-injector"><img alt="Pypi-version" src="https://img.shields.io/pypi/v/stress-injector" /></a>
 <a class="reference external" href="https://pypi.org/project/stress-injector"><img alt="Pypi-py-version" src="https://img.shields.io/pypi/pyversions/stress-injector" /></a></p>
-<p><img alt="docs" src="https://github.com/thevickypedia/stress-injector/actions/workflows/docs.yml/badge.svg" />
-<img alt="pypi" src="https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml/badge.svg" /></p>
+<p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/actions/workflows/pages/pages-build-deployment"><img alt="pages-build-deployment" src="https://github.com/thevickypedia/stress-injector/actions/workflows/pages/pages-build-deployment/badge.svg" /></a>
+<a class="reference external" href="https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml"><img alt="pypi-publish" src="https://github.com/thevickypedia/stress-injector/actions/workflows/python-publish.yml/badge.svg" /></a></p>
 <p><a class="reference external" href="https://pypi.org/project/stress-injector/#files"><img alt="Pypi-format" src="https://img.shields.io/pypi/format/stress-injector" /></a>
 <a class="reference external" href="https://pypi.org/project/stress-injector"><img alt="Pypi-status" src="https://img.shields.io/pypi/status/stress-injector" /></a></p>
 <p><img alt="Maintained" src="https://img.shields.io/maintenance/yes/2023" />
@@ -54,23 +54,23 @@
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/stress-injector"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/thevickypedia/stress-injector" /></a></p>
 <section id="stress-injector">
 <h1>Stress Injector<a class="headerlink" href="#stress-injector" title="Permalink to this heading">¶</a></h1>
-<p>Python module, to inject memory and CPU stress</p>
+<p>Python module, to inject memory, CPU and URL stress.</p>
 <details>
 <summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/cpu.py">CPU Stress</a></strong></summary><ul class="simple">
 <li><p>To achieve CPU stress, I have used multiprocess, looped for the number of logical cores, triggering an infinite loop on
 each core.</p></li>
-<li><p>The infinite loop will run for a given number of seconds provided by user.</p></li>
-<li><p>Mean-while the <code class="docutils literal notranslate"><span class="pre">cpu_percent</span></code> from <code class="docutils literal notranslate"><span class="pre">psutil</span></code> runs (dedicated thread) in an infinite loop calculating the current CPU
+<li><p>The infinite loop will run for a given number of seconds (provided by the user)</p></li>
+<li><p>Mean-while the <code class="docutils literal notranslate"><span class="pre">cpu_percent</span></code> from <code class="docutils literal notranslate"><span class="pre">psutil</span></code> runs (in a dedicated thread) in an infinite loop calculating the current CPU
 utilization on each CPU core.</p></li>
 <li><p>The dedicated thread runs for 3 seconds in addition to the number of seconds provided by the user.</p></li>
-<li><p>Once the given number of seconds have passed, the <code class="docutils literal notranslate"><span class="pre">multiprocess</span></code> and <code class="docutils literal notranslate"><span class="pre">thread</span></code> that was initiated to monitor CPU usage are stopped.</p></li>
+<li><p>Once the given number of seconds have passed, the <code class="docutils literal notranslate"><span class="pre">processes</span></code> and <code class="docutils literal notranslate"><span class="pre">threads</span></code> initiated to monitor CPU usage are stopped.</p></li>
 </ul>
 </details>
 <br>
 <details>
 <summary><strong>Insights about <a href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/memory.py">Memory Stress</a></strong></summary><ul class="simple">
 <li><p>In this script, I have used <code class="docutils literal notranslate"><span class="pre">numpy.random.bytes</span></code> which are sampled from uniform distribution.</p></li>
-<li><p>Generating these random bytes induces a stress on the machine’s memory usage.</p></li>
+<li><p>These random bytes are collected from the machine’s physical memory increasing the program’s usage.</p></li>
 <li><p>I have then used <code class="docutils literal notranslate"><span class="pre">getrusage</span></code> (get resource usage) for <code class="docutils literal notranslate"><span class="pre">SELF</span></code> to get the memory consumed only by the current script.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">size_converter</span></code> converts the bytes from resource usage to a human understandable format.</p></li>
 </ul>
@@ -106,7 +106,7 @@ utilization on each CPU core.</p></li>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">injector</span><span class="o">.</span><span class="n">MemoryStress</span><span class="p">(</span><span class="n">gigabytes</span><span class="o">=</span><span class="mi">2_000</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">injector</span><span class="o">.</span><span class="n">MemoryStress</span><span class="p">(</span><span class="n">gigabytes</span><span class="o">=</span><span class="mi">2_000</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://github.com/thevickypedia/stress-injector/blob/main/stressinjector/url.py">URL Stress</a></p>
@@ -126,6 +126,10 @@ utilization on each CPU core.</p></li>
     <span class="p">)</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p>This module can only induce stress on a given URL by making N number of calls. Suitable for APIs running on localhost.</p>
+<p>To perform a real-time load test, refer <a class="reference external" href="https://locust.io/">locust.io</a></p>
+</div></blockquote>
 <section id="coding-standards">
 <h3>Coding Standards<a class="headerlink" href="#coding-standards" title="Permalink to this heading">¶</a></h3>
 <p>Docstring format: <a class="reference external" href="https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings"><code class="docutils literal notranslate"><span class="pre">Google</span></code></a> <br>

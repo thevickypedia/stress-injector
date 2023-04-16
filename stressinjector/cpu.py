@@ -1,5 +1,5 @@
+import logging
 import os
-import sys
 import time
 from multiprocessing import Process
 from threading import Thread
@@ -7,7 +7,8 @@ from typing import List
 
 import psutil
 
-from .echo import echo
+from .helper import flush_screen, write_screen
+from .models import LOGGER
 
 
 class CPUStress:
@@ -17,10 +18,6 @@ class CPUStress:
 
     CPU is stressed using `multiprocessing.Process <https://docs.python.org/3/library/multiprocessing.html#
     the-process-class>`__ to run the infinite loop on each process.
-
-    Args:
-        seconds:
-            - The number of seconds for which the CPU has to be stressed. Defaults to five times the number of cores.
 
     Warnings:
         - CPU stress is induced in real time.
@@ -36,7 +33,14 @@ class CPUStress:
 
     CORES = os.cpu_count()
 
-    def __init__(self, seconds: int = CORES * 5):
+    def __init__(self, seconds: int = CORES * 5, logger: logging.Logger = None):
+        """Instantiates the members of the class.
+
+        Args:
+            seconds: The number of seconds CPU has to be stressed. Defaults to five times the number of cores.
+            logger: Custom logger.
+        """
+        self.LOGGER = logger or LOGGER
         self.seconds = seconds
         self.start_time = None
         self._run()
@@ -68,11 +72,10 @@ class CPUStress:
             output = ''
             for index, percent in enumerate(cpu_util):
                 output += f'Core {index + 1}: {percent}%\t'
-            sys.stdout.write(f'\r{output.strip()}')
+            write_screen(output.strip())
             if stop_thread:
                 break
-        sys.stdout.flush()
-        sys.stdout.write('\r')
+        flush_screen()
         processors = map(list, zip(*processors))
         processors = [max(processor) for processor in processors]
         processors = list(enumerate(processors))
@@ -80,11 +83,11 @@ class CPUStress:
 
         if self.start_time and (run_time := round(time.time() - self.start_time)):
             if (stop_when := self.seconds - run_time) and stop_when > 0:
-                echo.warning(f'Actual runtime: {run_time} seconds. Stopped {stop_when} seconds early.')
+                self.LOGGER.warning('Actual runtime: %d seconds. Stopped %d seconds early.', run_time, stop_when)
         else:
-            echo.warning('Stress Test was stopped before it began.')
+            self.LOGGER.warning('Stress Test was stopped before it began.')
 
-        echo.info('CPU Usage Report:')
+        self.LOGGER.info('CPU Usage Report:')
         [print(f'Core {processor + 1} - {self._format_number(usage)}%') for processor, usage in processors]
 
     @classmethod
@@ -110,7 +113,7 @@ class CPUStress:
         # noinspection PyGlobalUndefined
         global stop_thread
         try:
-            sys.stdout.write(f'\rStressing CPU cores for {self.seconds} seconds')
+            self.LOGGER.info('Stressing CPU cores for %d seconds', self.seconds)
             processes = []
             for n in range(self.CORES):
                 processes.append(Process(target=self._infinite))
@@ -127,5 +130,5 @@ class CPUStress:
             stop_thread = True
             measure.join()
         except KeyboardInterrupt:
-            sys.stdout.write('\rManual interrupt received. Stopping stress.')
+            self.LOGGER.warning('Manual interrupt received. Stopping stress.')
             stop_thread = True

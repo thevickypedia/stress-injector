@@ -1,6 +1,7 @@
 import logging
 import os
 import platform
+import sys
 from enum import Enum
 
 LOGGER = logging.getLogger(__name__)
@@ -32,6 +33,10 @@ class Settings:
 
     pid: int = os.getpid()
     os: str = platform.system()
+    if sys.stdin.isatty():
+        interactive = True
+    else:
+        interactive = False
 
 
 settings = Settings

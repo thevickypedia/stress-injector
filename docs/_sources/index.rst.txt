@@ -42,13 +42,6 @@ StressInjector - Models
    :members:
    :private-members:
 
-StressInjector - Echo
-=====================
-
-.. automodule:: stressinjector.echo
-   :members:
-   :private-members:
-
 Indices and tables
 ==================
 
