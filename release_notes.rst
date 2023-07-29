@@ -1,6 +1,15 @@
 Release Notes
 =============
 
+0.3.9 (07/29/2023)
+------------------
+- Fix imports on Windows
+- Release new version
+
+0.3.8 (07/27/2023)
+------------------
+- Remove resources lib from module import - make conditional per OS
+
 0.3.7 (04/16/2023)
 ------------------
 - Update sphinx docs

@@ -106,7 +106,7 @@ python -m pip install changelog-generator
 
 **Usage**
 ```shell
-changelog reverse -f release_notes.rst -t 'Release Notes'
+changelog reverse -f release_notes.rst -t "Release Notes"
 ```
 
 #### Linting

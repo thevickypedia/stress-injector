@@ -10,6 +10,9 @@ from tqdm import tqdm
 from .helper import flush_screen
 from .models import LOGGER, operating_system, settings
 
+if settings.os != operating_system.windows:
+    import resource
+
 
 def _size_converter(byte_size: Union[int, float]) -> str:
     """Gets the current memory consumed and converts it to human friendly format.
@@ -105,13 +108,10 @@ class MemoryStress:
                 `memory_info <https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_info>`__
         """
         if settings.os == operating_system.macOS:
-            import resource
             return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
         if settings.os == operating_system.linux:
-            import resource
             return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1e+3
         if settings.os == operating_system.windows:
-            import psutil
             return psutil.Process(settings.pid).memory_info().peak_wset
 
     def _run(self) -> None:
