@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+0.9 (08/30/2023)
+----------------
+- Includes some minor modifications in type hinting
+
 0.8 (07/29/2023)
 ----------------
 - Fix imports on Windows
