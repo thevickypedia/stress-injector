@@ -1,11 +1,11 @@
 import os
 import sys
-from typing import Any, NoReturn
+from typing import Any
 
 from .models import settings
 
 
-def flush_screen() -> NoReturn:
+def flush_screen() -> None:
     """Flushes the screen output.
 
     See Also:
@@ -17,7 +17,7 @@ def flush_screen() -> NoReturn:
         sys.stdout.write("\r")
 
 
-def write_screen(text: Any) -> NoReturn:
+def write_screen(text: Any) -> None:
     """Write text to a screen that can be cleared later.
 
     Args:

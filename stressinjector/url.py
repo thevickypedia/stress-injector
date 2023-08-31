@@ -4,7 +4,7 @@ import urllib.parse
 import warnings
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Event
-from typing import NoReturn, Union
+from typing import Union
 
 import requests
 
@@ -54,7 +54,7 @@ class URLStress:
         self.request_type = request_type
         self._run()
 
-    def make_request(self, sample: bool = False) -> NoReturn:
+    def make_request(self, sample: bool = False) -> None:
         """Makes a GET request to the endpoint.
 
         Args:
@@ -107,7 +107,7 @@ class URLStress:
                 self.RESULT['success'] += 1
         return True
 
-    def _run(self) -> NoReturn:
+    def _run(self) -> None:
         """Runs initiate request injection and prints success and error count."""
         try:
             self.LOGGER.info("Initiating sample call")

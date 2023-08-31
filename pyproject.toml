@@ -18,18 +18,18 @@ classifiers = [
     "Programming Language :: Python :: 3.11"
 ]
 keywords = ["stress-test", "numpy-arrays", "cpu-stress", "memory-stress",
-            "url-stress", "multiprocessing", "multithreading"]
+    "url-stress", "multiprocessing", "multithreading"]
 requires-python = ">=3.8"
 
 [tool.setuptools]
 packages = ["stressinjector"]
 
 [tool.setuptools.dynamic]
-version = {attr = "stressinjector.version"}
-dependencies = {file = ["stressinjector/requirements.txt"]}
+version = { attr = "stressinjector.version" }
+dependencies = { file = ["stressinjector/requirements.txt"] }
 
 [build-system]
-requires      = ["setuptools", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]

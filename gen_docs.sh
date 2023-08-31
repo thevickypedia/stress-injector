@@ -2,6 +2,7 @@
 # `set -e` stops the execution of a script if a command or pipeline has an error.
 # This is the opposite of the default shell behaviour, which is to ignore errors in scripts.
 set -e
+gitverse-release reverse -f release_notes.rst -t 'Release Notes'
 rm -rf docs
 mkdir docs
 [ ! -d "doc_generator/_static" ] && mkdir doc_generator/_static  # creates a _static folder if unavailable
